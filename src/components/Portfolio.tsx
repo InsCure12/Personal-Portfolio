@@ -27,7 +27,7 @@ const items = [
     subtitle: "React & TyperScript",
     handle: "Landing Page App",
     borderColor: "#ff00ff",
-    isComingSoon: true,
+    url: "https://mahadiputra.netlify.app/",
   },
   {
     image: "",
