@@ -1,0 +1,247 @@
+/* Portfolio Section Styles */
+.portfolio-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10rem 0;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Header Styles */
+.portfolio-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.portfolio-title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0 0 1rem 0;
+  text-shadow: 0 0 20px var(--neon-cyan);
+  line-height: 1.2;
+}
+
+.highlight-text {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+}
+
+.portfolio-subtitle {
+  font-size: 1.3rem;
+  color: var(--muted-foreground);
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Portfolio Grid */
+.portfolio-grid {
+  position: relative;
+  height: 550px;
+}
+
+/* Override ChromaGrid styles for your theme */
+.portfolio-grid .chroma-grid {
+  --r: 300px;
+  --cols: 3;
+  --rows: 2;
+}
+
+.portfolio-grid .chroma-card {
+  background: var(--dark-card);
+  border: 2px solid var(--dark-border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio-grid .chroma-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), 0 0 20px var(--card-border);
+  border-color: var(--card-border);
+}
+
+.portfolio-grid .chroma-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+}
+
+.portfolio-grid .chroma-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-grid .chroma-card:hover .chroma-img-wrapper img {
+  transform: scale(1.1);
+}
+
+.portfolio-grid .chroma-info {
+  padding: 1.5rem;
+  background: var(--dark-card);
+}
+
+.portfolio-grid .chroma-info .name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.portfolio-grid .chroma-info .handle {
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  margin: 0 0 0.5rem 0;
+  display: block;
+}
+
+.portfolio-grid .chroma-info .role {
+  font-size: 1rem;
+  color: var(--foreground);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ChromaGrid overlay effects */
+.portfolio-grid .chroma-overlay {
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(0, 212, 255, 0.1) 0%,
+    transparent 50%
+  );
+}
+
+.portfolio-grid .chroma-fade {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.05) 0%,
+    rgba(168, 85, 247, 0.05) 100%
+  );
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .portfolio-container {
+    padding: 0 1rem;
+  }
+  
+  .portfolio-title {
+    font-size: 3rem;
+  }
+  
+  .portfolio-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .portfolio-grid {
+    height: 600px;
+  }
+  
+  .portfolio-grid .chroma-card {
+    border-radius: 12px;
+  }
+  
+  .portfolio-grid .chroma-img-wrapper {
+    height: 150px;
+  }
+  
+  .portfolio-grid .chroma-info {
+    padding: 1rem;
+  }
+  
+  .portfolio-grid .chroma-info .name {
+    font-size: 1.1rem;
+  }
+  
+  .portfolio-grid .chroma-info .role {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-title {
+    font-size: 2.5rem;
+  }
+  
+  .portfolio-subtitle {
+    font-size: 1rem;
+  }
+  
+  .portfolio-grid {
+    height: 500px;
+  }
+  
+  .portfolio-grid .chroma-img-wrapper {
+    height: 120px;
+  }
+  
+  .portfolio-grid .chroma-info {
+    padding: 0.8rem;
+  }
+  
+  .portfolio-grid .chroma-info .name {
+    font-size: 1rem;
+  }
+  
+  .portfolio-grid .chroma-info .handle {
+    font-size: 0.8rem;
+  }
+  
+  .portfolio-grid .chroma-info .role {
+    font-size: 0.85rem;
+  }
+}
+
+/* Animation for portfolio elements */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.portfolio-header,
+.portfolio-grid {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.portfolio-header {
+  animation-delay: 0.2s;
+}
+
+.portfolio-grid {
+  animation-delay: 0.4s;
+}
+
+/* Subtle glow effect for the entire section */
+.portfolio-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -1;
+}

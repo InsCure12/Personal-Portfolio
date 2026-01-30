@@ -1,0 +1,8 @@
+#root {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  text-align: center;
+  background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+  radial-gradient(circle at 80% 50%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+}
