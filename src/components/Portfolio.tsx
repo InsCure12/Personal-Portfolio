@@ -30,12 +30,12 @@ const items = [
     url: "https://mahadiputra.netlify.app/",
   },
   {
-    image: "",
-    title: "Coming Soon",
-    subtitle: "Coming Soon",
-    handle: "Coming Soon",
-    borderColor: "#ff00ff",
-    isComingSoon: true,
+    image: "public/Screenshot 2026-01-31 at 00.40.30.png",
+    title: "PC Builder Simulation",
+    subtitle: "TypeScript",
+    handle: "Simulate your own PC",
+    borderColor: "#ffda",
+    url: "https://simulateyourbuild.netlify.app/",
   },
 ];
 

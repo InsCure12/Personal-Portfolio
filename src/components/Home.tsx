@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, Twitter, Instagram } from "lucide-react";
 import { motion } from "framer-motion";
@@ -160,9 +159,6 @@ const Home = () => {
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
-                onClick={() =>
-                  (window.location.href = "#portfolio scrollIntoView")
-                }
                 className="bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-cyan-500/25 text-sm md:text-base w-full sm:w-auto"
                 onClick={() => {
                   document.getElementById("portfolio")?.scrollIntoView({
@@ -177,6 +173,13 @@ const Home = () => {
               <Button
                 variant="outline"
                 className="border-2 border-white/30 text-white hover:bg-white/10 px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm text-sm md:text-base w-full sm:w-auto"
+                onClick={() => {
+                  const cvUrl = new URL(
+                    "/src/assets/file/CV-Adip.pdf",
+                    import.meta.url,
+                  ).href;
+                  window.open(cvUrl, "_blank");
+                }}
               >
                 Download CV
               </Button>
@@ -207,6 +210,8 @@ const Home = () => {
               showUserInfo={true}
               enableTilt={true}
               enableMobileTilt={true}
+              behindGradient="linear-gradient(135deg, var(--neon-cyan), var(--neon-purple))"
+              innerGradient="linear-gradient(135deg, var(--neon-green), var(--neon-cyan))"
               onContactClick={() => console.log("Contact clicked")}
             />
           </motion.div>
