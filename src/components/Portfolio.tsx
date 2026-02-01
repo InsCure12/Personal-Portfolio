@@ -37,6 +37,14 @@ const items = [
     borderColor: "#ffda",
     url: "https://simulateyourbuild.netlify.app/",
   },
+  {
+    image: "public/Screenshot 2026-02-01 at 20.20.10.png",
+    title: "BalanceUp",
+    subtitle: "TypeScript & Firebase",
+    handle: "Expense Tracker App",
+    borderColor: "#ffaa00",
+    url: "https://balanceup-tracker.vercel.app",
+  },
 ];
 
 const Portfolio = () => {
