@@ -11,7 +11,7 @@ const items = [
     subtitle: "React & Node.js",
     handle: "Full Stack Web App",
     borderColor: "#00d4ff",
-    url: "photography-portfolio-ten-gamma.vercel.app",
+    url: "https://photography-portfolio-ten-gamma.vercel.app",
   },
   {
     image: "/Screenshot 2025-10-08 at 22.12.40.png",
@@ -19,7 +19,7 @@ const items = [
     subtitle: "React & TypeScript",
     handle: "Real-time Data App",
     borderColor: "#64ffda",
-    url: "https://dashboard-cypto-app.netlify.app/",
+    url: "https://dashboard-cypto-app.netlify.app",
   },
   {
     image: "public/Screenshot 2026-01-30 at 16.56.36.png",
@@ -27,7 +27,7 @@ const items = [
     subtitle: "React & TyperScript",
     handle: "Landing Page App",
     borderColor: "#ff00ff",
-    url: "mahadiputra-portfolio.vercel.app",
+    url: "https://mahadiputra-portfolio.vercel.app",
   },
   {
     image: "public/Screenshot 2026-01-31 at 00.40.30.png",
@@ -35,7 +35,7 @@ const items = [
     subtitle: "TypeScript",
     handle: "Simulate your own PC",
     borderColor: "#ffda",
-    url: "pc-builder-simulation.vercel.app",
+    url: "https://pc-builder-simulation.vercel.app",
   },
   {
     image: "public/Screenshot 2026-02-01 at 20.20.10.png",
