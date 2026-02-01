@@ -11,7 +11,7 @@ const items = [
     subtitle: "React & Node.js",
     handle: "Full Stack Web App",
     borderColor: "#00d4ff",
-    url: "https://dipotoinadip.netlify.app/",
+    url: "photography-portfolio-ten-gamma.vercel.app",
   },
   {
     image: "/Screenshot 2025-10-08 at 22.12.40.png",
@@ -27,7 +27,7 @@ const items = [
     subtitle: "React & TyperScript",
     handle: "Landing Page App",
     borderColor: "#ff00ff",
-    url: "https://mahadiputra.netlify.app/",
+    url: "mahadiputra-portfolio.vercel.app",
   },
   {
     image: "public/Screenshot 2026-01-31 at 00.40.30.png",
@@ -35,7 +35,7 @@ const items = [
     subtitle: "TypeScript",
     handle: "Simulate your own PC",
     borderColor: "#ffda",
-    url: "https://simulateyourbuild.netlify.app/",
+    url: "pc-builder-simulation.vercel.app",
   },
   {
     image: "public/Screenshot 2026-02-01 at 20.20.10.png",
