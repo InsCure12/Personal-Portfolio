@@ -1,12 +1,12 @@
-import React from 'react';
-import Particles from 'react-tsparticles';
-import { loadFull } from 'tsparticles';
-import type { Engine } from 'tsparticles-engine';
+import React from "react";
+import Particles from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+import type { Engine } from "@tsparticles/engine";
 
 const ParticlesBackground: React.FC = () => {
   const particlesInit = async (engine: Engine) => {
-    // This loads the tsparticles package bundle with all features
-    await loadFull(engine);
+    // This loads the tsparticles slim bundle for better performance
+    await loadSlim(engine);
   };
 
   return (
