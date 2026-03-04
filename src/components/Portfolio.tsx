@@ -3,10 +3,15 @@ import { useInView } from "react-intersection-observer";
 import ChromaGrid from "./ChromaGrid";
 import GradientText from "./GradientText";
 import "./Portfolio.css";
+import imgPhotography from "../assets/img/photography-web.png";
+import imgCrypto from "../assets/img/dashboard-crypto.png";
+import imgPortfolio from "../assets/img/personal-portfolio.png";
+import imgPcBuilder from "../assets/img/pc-builder.png";
+import imgBalanceUp from "../assets/img/balanceup.png";
 
 const items = [
   {
-    image: "/Screenshot 2025-10-08 at 22.09.57.png",
+    image: imgPhotography,
     title: "Photography Landing Page",
     subtitle: "React & Node.js",
     handle: "Full Stack Web App",
@@ -14,7 +19,7 @@ const items = [
     url: "https://photography-portfolio-ten-gamma.vercel.app",
   },
   {
-    image: "/Screenshot 2025-10-08 at 22.12.40.png",
+    image: imgCrypto,
     title: "Crypto Dashboard",
     subtitle: "React & TypeScript",
     handle: "Real-time Data App",
@@ -22,7 +27,7 @@ const items = [
     url: "https://dashboard-cypto-app.netlify.app",
   },
   {
-    image: "public/Screenshot 2026-01-30 at 16.56.36.png",
+    image: imgPortfolio,
     title: "Personal Portfolio",
     subtitle: "React & TyperScript",
     handle: "Landing Page App",
@@ -30,7 +35,7 @@ const items = [
     url: "https://mahadiputra-portfolio.vercel.app",
   },
   {
-    image: "public/Screenshot 2026-01-31 at 00.40.30.png",
+    image: imgPcBuilder,
     title: "PC Builder Simulation",
     subtitle: "TypeScript",
     handle: "Simulate your own PC",
@@ -38,7 +43,7 @@ const items = [
     url: "https://pc-builder-simulation.vercel.app",
   },
   {
-    image: "public/Screenshot 2026-02-01 at 20.20.10.png",
+    image: imgBalanceUp,
     title: "BalanceUp",
     subtitle: "TypeScript & Firebase",
     handle: "Expense Tracker App",

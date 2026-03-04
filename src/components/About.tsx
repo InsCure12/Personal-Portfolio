@@ -5,6 +5,7 @@ import { Download, Briefcase } from "lucide-react";
 import GradientText from "./GradientText";
 import CountUp from "./CountUp";
 import "./About.css";
+import imgProfile from "../assets/img/img-3440.jpg";
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -68,7 +69,7 @@ const About = () => {
           <motion.div className="about-profile" variants={itemVariants}>
             <div className="profile-image-container">
               <img
-                src="./public/img-3440.jpg"
+                src={imgProfile}
                 alt="Putu Adip - Frontend Developer"
                 className="profile-image"
               />
@@ -112,7 +113,7 @@ const About = () => {
                 <span className="stat-number">
                   <CountUp
                     from={0}
-                    to={3}
+                    to={2}
                     direction="up"
                     duration={2}
                     delay={0.5}
@@ -127,7 +128,7 @@ const About = () => {
                   <span className="stat-plus">+</span>
                   <CountUp
                     from={0}
-                    to={50}
+                    to={20}
                     direction="up"
                     duration={2}
                     delay={0.8}

@@ -17,3 +17,16 @@
       transparent 50%
     );
 }
+
+/* Main scroll container mobile fix */
+@media (max-width: 768px) {
+  .main-scroll-container {
+    padding: 0 0.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-scroll-container {
+    padding: 0 0.25rem !important;
+  }
+}

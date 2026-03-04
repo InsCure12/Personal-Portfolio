@@ -230,7 +230,7 @@
 }
 
 .timeline-item::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -271,58 +271,73 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .resume-section {
+    padding: 4rem 0;
+  }
+
   .scroll-timeline-container {
     max-width: 100%;
     padding: 1rem 0;
   }
-  
+
   .timeline-item-content {
-    width: 80%;
-    margin-left: auto !important;
+    width: 75%;
+    margin-left: 50px !important;
     margin-right: auto !important;
   }
-  
+
+  .timeline-item-scroll:nth-child(even) .timeline-item-content {
+    margin-left: 50px !important;
+    margin-right: auto !important;
+  }
+
   .timeline-connector {
     display: none;
   }
-  
+
   .timeline-progress-line {
     left: 20px;
     transform: none;
   }
-  
+
   .timeline-progress-indicator {
     left: 20px;
     transform: none;
   }
-  
+
   .resume-content {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
-  
+
   .resume-title {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
-  
+
   .column-title {
     font-size: 1.5rem;
   }
-  
+
   .resume-container {
     padding: 0 1rem;
   }
-  
+
   .timeline-item {
     padding: 1.2rem;
   }
-  
+
   .timeline-title {
     font-size: 1.1rem;
   }
-  
+
   .timeline-company {
     font-size: 0.9rem;
+  }
+
+  .timeline-item-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
   }
 }
 
@@ -330,19 +345,19 @@
   .resume-title {
     font-size: 1.8rem;
   }
-  
+
   .column-title {
     font-size: 1.3rem;
   }
-  
+
   .timeline-item {
     padding: 1rem;
   }
-  
+
   .timeline-title {
     font-size: 1rem;
   }
-  
+
   .timeline-date {
     font-size: 0.8rem;
   }
@@ -364,10 +379,18 @@
   animation: slideInUp 0.6s ease forwards;
 }
 
-.timeline-item:nth-child(1) { animation-delay: 0.1s; }
-.timeline-item:nth-child(2) { animation-delay: 0.2s; }
-.timeline-item:nth-child(3) { animation-delay: 0.3s; }
-.timeline-item:nth-child(4) { animation-delay: 0.4s; }
+.timeline-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.timeline-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.timeline-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.timeline-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
 
 /* Hover effects for better interactivity */
 .timeline-item:hover .timeline-date {
@@ -382,7 +405,7 @@
 
 /* Subtle glow effect for the entire section */
 .resume-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;

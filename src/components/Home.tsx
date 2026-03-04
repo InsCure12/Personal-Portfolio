@@ -3,6 +3,7 @@ import { Github, Linkedin, Mail, Twitter, Instagram } from "lucide-react";
 import { motion } from "framer-motion";
 import ProfileCard from "./ProfileCard";
 import TextType from "./TextType";
+import profile from "../assets/img/IMG_3416.jpg";
 
 const Home = () => {
   const containerVariants = {
@@ -205,8 +206,8 @@ const Home = () => {
               handle="adipadiadip"
               status="Online"
               contactText="Contact Me"
-              avatarUrl="/profile.jpg"
-              miniAvatarUrl="/profile.jpg"
+              avatarUrl={profile}
+              miniAvatarUrl={profile}
               showUserInfo={true}
               enableTilt={true}
               enableMobileTilt={true}

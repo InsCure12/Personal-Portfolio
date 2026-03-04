@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10rem 0;
+  padding: 6rem 0;
   background: transparent;
   position: relative;
   overflow: hidden;
@@ -71,7 +71,9 @@
 
 .portfolio-grid .chroma-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), 0 0 20px var(--card-border);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.3),
+    0 0 20px var(--card-border);
   border-color: var(--card-border);
 }
 
@@ -138,72 +140,81 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .portfolio-container {
-    padding: 0 1rem;
+  .portfolio-section {
+    padding: 4rem 0;
+    min-height: auto;
   }
-  
+
+  .portfolio-container {
+    padding: 0 0.5rem;
+  }
+
   .portfolio-title {
     font-size: 3rem;
   }
-  
+
   .portfolio-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .portfolio-grid {
     height: 600px;
   }
-  
+
   .portfolio-grid .chroma-card {
     border-radius: 12px;
   }
-  
+
   .portfolio-grid .chroma-img-wrapper {
     height: 150px;
   }
-  
+
   .portfolio-grid .chroma-info {
     padding: 1rem;
   }
-  
+
   .portfolio-grid .chroma-info .name {
     font-size: 1.1rem;
   }
-  
+
   .portfolio-grid .chroma-info .role {
     font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
-  .portfolio-title {
-    font-size: 2.5rem;
+  .portfolio-section {
+    padding: 3rem 0;
   }
-  
+
+  .portfolio-title {
+    font-size: 2rem;
+  }
+
   .portfolio-subtitle {
     font-size: 1rem;
   }
-  
+
   .portfolio-grid {
     height: 500px;
   }
-  
+
   .portfolio-grid .chroma-img-wrapper {
     height: 120px;
   }
-  
+
   .portfolio-grid .chroma-info {
     padding: 0.8rem;
   }
-  
+
   .portfolio-grid .chroma-info .name {
     font-size: 1rem;
   }
-  
+
   .portfolio-grid .chroma-info .handle {
     font-size: 0.8rem;
   }
-  
+
   .portfolio-grid .chroma-info .role {
     font-size: 0.85rem;
   }
@@ -236,7 +247,7 @@
 
 /* Subtle glow effect for the entire section */
 .portfolio-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;

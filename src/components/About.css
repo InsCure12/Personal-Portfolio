@@ -3,7 +3,7 @@
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  padding: 7rem;
+  padding: 5rem 2rem;
   background: transparent;
   position: relative;
   overflow-x: hidden;
@@ -49,10 +49,10 @@
 .about-content {
   display: flex;
   flex-direction: row;
-  gap: 7rem;
-  justify-items: center;
+  gap: 4rem;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 10rem;
+  margin-bottom: 6rem;
 }
 
 /* Left Column - Profile Picture */
@@ -213,13 +213,13 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .about-section {
-    padding: 3rem 1rem;
+    padding: 3rem 0.5rem;
   }
 
   .about-content {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 2.5rem;
-    justify-items: center;
+    align-items: center;
   }
 
   .about-title {
