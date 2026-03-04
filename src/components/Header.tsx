@@ -1,157 +1,134 @@
-import { useState, useEffect } from 'react'
-import './Header.css'
+import { useState, useEffect, useRef, useCallback } from "react";
+import "./Header.css";
+
+const SECTIONS = ["home", "about", "skills", "resume", "portfolio"] as const;
+
+const NAV_ITEMS = [
+  { label: "Home", href: "home" },
+  { label: "About", href: "about" },
+  { label: "Skills", href: "skills" },
+  { label: "Resume", href: "resume" },
+  { label: "Portfolio", href: "portfolio" },
+];
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState('home')
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const navRef = useRef<HTMLElement>(null);
+  const indicatorRef = useRef<HTMLDivElement>(null);
+  const isManualScroll = useRef(false);
+
+  // Move sliding indicator to the active button
+  const moveIndicator = useCallback(() => {
+    if (!navRef.current || !indicatorRef.current) return;
+    const activeBtn = navRef.current.querySelector(
+      `.nav-link[data-section="${activeSection}"]`,
+    ) as HTMLElement | null;
+    if (activeBtn) {
+      const navRect = navRef.current.getBoundingClientRect();
+      const btnRect = activeBtn.getBoundingClientRect();
+      indicatorRef.current.style.width = `${btnRect.width}px`;
+      indicatorRef.current.style.transform = `translateX(${btnRect.left - navRect.left}px)`;
+      indicatorRef.current.style.opacity = "1";
+    }
+  }, [activeSection]);
 
   useEffect(() => {
-    // Use Intersection Observer for more accurate detection
-    const observerOptions = {
-      root: document.querySelector('motion.div[style*="overflowY: auto"]'),
-      rootMargin: '-20% 0px -20% 0px',
-      threshold: 0.1
-    }
+    moveIndicator();
+    window.addEventListener("resize", moveIndicator);
+    return () => window.removeEventListener("resize", moveIndicator);
+  }, [moveIndicator]);
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const sectionId = entry.target.id
-          console.log(`Intersection Observer detected: ${sectionId}`)
-          setActiveSection(sectionId)
-        }
-      })
-    }, observerOptions)
+  // Scroll-spy: find the section closest to the top of the viewport
+  useEffect(() => {
+    const scrollContainer = document.querySelector(
+      ".main-scroll-container",
+    ) as HTMLElement | null;
+    if (!scrollContainer) return;
 
-    // Observe all sections
-    const sections = ['home', 'about', 'resume', 'portfolio']
-    sections.forEach(sectionId => {
-      const element = document.getElementById(sectionId)
-      if (element) {
-        observer.observe(element)
-      }
-    })
-
-    // Fallback scroll handler
     const handleScroll = () => {
-      const scrollContainer = document.querySelector('motion.div[style*="overflowY: auto"]')
-      if (scrollContainer) {
-        setScrolled(scrollContainer.scrollTop > 50)
-      } else {
-        setScrolled(window.scrollY > 50)
-      }
-    }
+      setScrolled(scrollContainer.scrollTop > 50);
 
-    // Listen to scroll events for scrolled state
-    window.addEventListener('scroll', handleScroll)
-    const scrollContainer = document.querySelector('motion.div[style*="overflowY: auto"]')
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', handleScroll)
-    }
+      // Skip scroll-spy while we're smooth-scrolling from a click
+      if (isManualScroll.current) return;
 
-    return () => {
-      observer.disconnect()
-      window.removeEventListener('scroll', handleScroll)
-      if (scrollContainer) {
-        scrollContainer.removeEventListener('scroll', handleScroll)
+      const containerTop = scrollContainer.getBoundingClientRect().top;
+      const viewportH = scrollContainer.clientHeight;
+      let current = "home";
+
+      for (const id of SECTIONS) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        // Section is "active" when its top is within the upper 40% of the viewport
+        if (rect.top - containerTop <= viewportH * 0.4) {
+          current = id;
+        }
       }
-    }
-  }, [])
+
+      setActiveSection(current);
+    };
+
+    scrollContainer.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // initial check
+    return () => scrollContainer.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleNavigation = (sectionId: string) => {
-    try {
-      const element = document.getElementById(sectionId)
-      const scrollContainer = document.querySelector('motion.div[style*="overflowY: auto"]')
-      
-      // Immediately update active section
-      setActiveSection(sectionId)
-      console.log(`Navigating to: ${sectionId}`)
-      
-      if (element) {
-        if (sectionId === 'home') {
-          // For Home, force scroll to absolute top
-          if (scrollContainer) {
-            scrollContainer.scrollTop = 0
-            scrollContainer.scrollTo({ top: 0, behavior: 'smooth' })
-            console.log('Direct scroll to top for Home')
-          } else {
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-            console.log('Window scroll to top for Home')
-          }
-          
-          // Also try scrollIntoView as backup
-          setTimeout(() => {
-            element.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'start',
-              inline: 'nearest'
-            })
-            console.log('Backup scrollIntoView for Home')
-          }, 100)
-        } else {
-          // For other sections, use normal scrollIntoView
-          element.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start',
-            inline: 'nearest'
-          })
-        }
-      }
-    } catch (error) {
-      console.error('Navigation error:', error)
+    const element = document.getElementById(sectionId);
+    const scrollContainer = document.querySelector(".main-scroll-container");
+
+    setActiveSection(sectionId);
+    isManualScroll.current = true;
+
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-    
-    setIsMenuOpen(false)
-  }
 
-  const isActive = (sectionId: string) => {
-    return activeSection === sectionId
-  }
+    // Re-enable scroll spy after the smooth scroll settles
+    setTimeout(() => {
+      isManualScroll.current = false;
+    }, 800);
 
-  const navItems = [
-    { label: 'Home', href: 'home' },
-    { label: 'About', href: 'about' },
-    { label: 'Resume', href: 'resume' },
-    { label: 'Portfolio', href: 'portfolio' }
-  ]
+    setIsMenuOpen(false);
+  };
 
   return (
-    <header className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
-      <div className="navbar-container">
-        {/* Desktop Navigation */}
-        <nav className="navbar-nav desktop-nav">
-          {navItems.map((item) => (
-            <div key={item.href} className="nav-item">
-              <button
-                className={`nav-link ${isActive(item.href) ? 'active' : ''}`}
-                onClick={() => handleNavigation(item.href)}
-              >
-                <span className="nav-text">{item.label}</span>
-                <div className="nav-indicator"></div>
-              </button>
-            </div>
-          ))}
-        </nav>
+    <header className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
+      {/* Floating pill — desktop */}
+      <nav ref={navRef} className="nav-pill">
+        <div ref={indicatorRef} className="nav-pill-indicator" />
+        {NAV_ITEMS.map((item) => (
+          <button
+            key={item.href}
+            data-section={item.href}
+            className={`nav-link ${activeSection === item.href ? "active" : ""}`}
+            onClick={() => handleNavigation(item.href)}
+          >
+            {item.label}
+          </button>
+        ))}
+      </nav>
 
-        {/* Mobile Menu Button */}
-        <button 
-          className={`mobile-menu-button ${isMenuOpen ? 'open' : ''}`}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-        </button>
-      </div>
+      {/* Mobile hamburger */}
+      <button
+        className={`mobile-menu-button ${isMenuOpen ? "open" : ""}`}
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        aria-label="Toggle menu"
+      >
+        <span className="hamburger-line" />
+        <span className="hamburger-line" />
+        <span className="hamburger-line" />
+      </button>
 
-      {/* Mobile Menu */}
-      <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
+      {/* Mobile drawer */}
+      <div className={`mobile-menu ${isMenuOpen ? "open" : ""}`}>
         <div className="mobile-menu-content">
-          {navItems.map((item) => (
+          {NAV_ITEMS.map((item) => (
             <button
               key={item.href}
-              className={`mobile-nav-link ${isActive(item.href) ? 'active' : ''}`}
+              className={`mobile-nav-link ${activeSection === item.href ? "active" : ""}`}
               onClick={() => handleNavigation(item.href)}
             >
               {item.label}
@@ -160,7 +137,7 @@ const Header = () => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

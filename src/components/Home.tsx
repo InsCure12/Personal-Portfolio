@@ -5,61 +5,61 @@ import ProfileCard from "./ProfileCard";
 import TextType from "./TextType";
 import profile from "../assets/img/IMG_3416.jpg";
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
+const socialIcons = [
+  {
+    Icon: Github,
+    href: "https://github.com/InsCure12",
+    delay: 0,
+    target: "_blank",
+    rel: "noopener noreferrer",
+  },
+  {
+    Icon: Linkedin,
+    href: "https://www.linkedin.com/in/i-putu-mahadiputra-udayana-7252012ab/",
+    delay: 0.1,
+    target: "_blank",
+    rel: "noopener noreferrer",
+  },
+  {
+    Icon: Mail,
+    href: "mailto:mahadiputra09@gmail.com",
+    delay: 0.2,
+    target: "_blank",
+    rel: "noopener noreferrer",
+  },
+  { Icon: Twitter, href: "#", delay: 0.3 },
+  {
+    Icon: Instagram,
+    href: "https://www.instagram.com/adip.jpeg/",
+    delay: 0.4,
+    target: "_blank",
+    rel: "noopener noreferrer",
+  },
+];
+
 const Home = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
-  const socialIcons = [
-    {
-      Icon: Github,
-      href: "https://github.com/InsCure12",
-      delay: 0,
-      target: "_blank",
-      rel: "noopener noreferrer",
-    },
-    {
-      Icon: Linkedin,
-      href: "https://www.linkedin.com/in/i-putu-mahadiputra-udayana-7252012ab/",
-      delay: 0.1,
-      target: "_blank",
-      rel: "noopener noreferrer",
-    },
-    {
-      Icon: Mail,
-      href: "mailto:mahadiputra09@gmail.com",
-      delay: 0.2,
-      target: "_blank",
-      rel: "noopener noreferrer",
-    },
-    { Icon: Twitter, href: "#", delay: 0.3 },
-    {
-      Icon: Instagram,
-      href: "https://www.instagram.com/adip.jpeg/",
-      delay: 0.4,
-      target: "_blank",
-      rel: "noopener noreferrer",
-    },
-  ];
-
   return (
     <div className="min-h-screen flex items-center justify-center px-4 md:px-6 lg:px-8 pt-24 md:pt-50 pb-8 md:pb-4">
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center max-w-7xl w-full">
@@ -175,11 +175,7 @@ const Home = () => {
                 variant="outline"
                 className="border-2 border-white/30 text-white hover:bg-white/10 px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm text-sm md:text-base w-full sm:w-auto"
                 onClick={() => {
-                  const cvUrl = new URL(
-                    "/src/assets/file/CV-Adip.pdf",
-                    import.meta.url,
-                  ).href;
-                  window.open(cvUrl, "_blank");
+                  window.open("/CV-Adip.pdf", "_blank");
                 }}
               >
                 Download CV
@@ -213,7 +209,9 @@ const Home = () => {
               enableMobileTilt={true}
               behindGradient="linear-gradient(135deg, var(--neon-cyan), var(--neon-purple))"
               innerGradient="linear-gradient(135deg, var(--neon-green), var(--neon-cyan))"
-              onContactClick={() => console.log("Contact clicked")}
+              onContactClick={() =>
+                window.open("mailto:mahadiputra09@gmail.com")
+              }
             />
           </motion.div>
         </motion.div>

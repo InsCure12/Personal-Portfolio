@@ -1,12 +1,15 @@
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import Header from "./components/Header.tsx";
 import Home from "./components/Home.tsx";
-import About from "./components/About.tsx";
-import Resume from "./components/Resume.tsx";
-import Portfolio from "./components/Portfolio.tsx";
 import Particles from "./components/Particles.jsx";
 import GradualBlur from "./components/GradualBlur.jsx";
 import "./App.css";
+
+const About = lazy(() => import("./components/About.tsx"));
+const Skills = lazy(() => import("./components/Skills.tsx"));
+const Resume = lazy(() => import("./components/Resume.tsx"));
+const Portfolio = lazy(() => import("./components/Portfolio.tsx"));
 
 function App() {
   return (
@@ -38,17 +41,23 @@ function App() {
             <Home />
           </section>
 
-          <section id="about">
-            <About />
-          </section>
+          <Suspense fallback={<div className="min-h-screen" />}>
+            <section id="about">
+              <About />
+            </section>
 
-          <section id="resume">
-            <Resume />
-          </section>
+            <section id="skills">
+              <Skills />
+            </section>
 
-          <section id="portfolio">
-            <Portfolio />
-          </section>
+            <section id="resume">
+              <Resume />
+            </section>
+
+            <section id="portfolio">
+              <Portfolio />
+            </section>
+          </Suspense>
         </main>
       </motion.div>
       <GradualBlur
