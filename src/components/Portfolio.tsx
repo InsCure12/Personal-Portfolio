@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import GradientText from "./GradientText";
 import "./Portfolio.css";
@@ -246,6 +246,7 @@ const Portfolio = () => {
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("All");
+  const handleClose = useCallback(() => setSelectedProject(null), []);
 
   const filtered = activeFilter === "All"
     ? projects
@@ -297,7 +298,7 @@ const Portfolio = () => {
         {selectedProject && (
           <ProjectModal
             project={selectedProject}
-            onClose={() => setSelectedProject(null)}
+            onClose={handleClose}
           />
         )}
       </AnimatePresence>
