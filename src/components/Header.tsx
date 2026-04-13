@@ -1,14 +1,19 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import "./Header.css";
 
-const SECTIONS = ["home", "about", "skills", "resume", "portfolio"] as const;
+const SECTIONS = [
+  "home", "about", "services", "skills", "portfolio", "resume", "testimonials", "contact"
+] as const;
 
 const NAV_ITEMS = [
   { label: "Home", href: "home" },
   { label: "About", href: "about" },
+  { label: "Services", href: "services" },
   { label: "Skills", href: "skills" },
-  { label: "Resume", href: "resume" },
   { label: "Portfolio", href: "portfolio" },
+  { label: "Resume", href: "resume" },
+  { label: "Testimonials", href: "testimonials" },
+  { label: "Contact", href: "contact" },
 ];
 
 const Header = () => {
@@ -18,8 +23,9 @@ const Header = () => {
   const navRef = useRef<HTMLElement>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
   const isManualScroll = useRef(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Move sliding indicator to the active button
   const moveIndicator = useCallback(() => {
     if (!navRef.current || !indicatorRef.current) return;
     const activeBtn = navRef.current.querySelector(
@@ -40,7 +46,7 @@ const Header = () => {
     return () => window.removeEventListener("resize", moveIndicator);
   }, [moveIndicator]);
 
-  // Scroll-spy: find the section closest to the top of the viewport
+  // Scroll-spy
   useEffect(() => {
     const scrollContainer = document.querySelector(
       ".main-scroll-container",
@@ -49,8 +55,6 @@ const Header = () => {
 
     const handleScroll = () => {
       setScrolled(scrollContainer.scrollTop > 50);
-
-      // Skip scroll-spy while we're smooth-scrolling from a click
       if (isManualScroll.current) return;
 
       const containerTop = scrollContainer.getBoundingClientRect().top;
@@ -61,7 +65,6 @@ const Header = () => {
         const el = document.getElementById(id);
         if (!el) continue;
         const rect = el.getBoundingClientRect();
-        // Section is "active" when its top is within the upper 40% of the viewport
         if (rect.top - containerTop <= viewportH * 0.4) {
           current = id;
         }
@@ -71,14 +74,49 @@ const Header = () => {
     };
 
     scrollContainer.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // initial check
+    handleScroll();
     return () => scrollContainer.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Focus trap and Escape key for mobile menu
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsMenuOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+
+      if (e.key === "Tab" && menuRef.current) {
+        const focusable = menuRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], [tabindex]:not([tabindex="-1"])'
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
   const handleNavigation = (sectionId: string) => {
     const element = document.getElementById(sectionId);
-    const scrollContainer = document.querySelector(".main-scroll-container");
-
     setActiveSection(sectionId);
     isManualScroll.current = true;
 
@@ -86,7 +124,6 @@ const Header = () => {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    // Re-enable scroll spy after the smooth scroll settles
     setTimeout(() => {
       isManualScroll.current = false;
     }, 800);
@@ -95,48 +132,67 @@ const Header = () => {
   };
 
   return (
-    <header className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
-      {/* Floating pill — desktop */}
-      <nav ref={navRef} className="nav-pill">
-        <div ref={indicatorRef} className="nav-pill-indicator" />
-        {NAV_ITEMS.map((item) => (
-          <button
-            key={item.href}
-            data-section={item.href}
-            className={`nav-link ${activeSection === item.href ? "active" : ""}`}
-            onClick={() => handleNavigation(item.href)}
-          >
-            {item.label}
-          </button>
-        ))}
-      </nav>
+    <>
+      {/* Skip to main content */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
 
-      {/* Mobile hamburger */}
-      <button
-        className={`mobile-menu-button ${isMenuOpen ? "open" : ""}`}
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        aria-label="Toggle menu"
-      >
-        <span className="hamburger-line" />
-        <span className="hamburger-line" />
-        <span className="hamburger-line" />
-      </button>
-
-      {/* Mobile drawer */}
-      <div className={`mobile-menu ${isMenuOpen ? "open" : ""}`}>
-        <div className="mobile-menu-content">
+      <header className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
+        {/* Floating pill — desktop */}
+        <nav ref={navRef} className="nav-pill" aria-label="Main navigation">
+          <div ref={indicatorRef} className="nav-pill-indicator" />
           {NAV_ITEMS.map((item) => (
             <button
               key={item.href}
-              className={`mobile-nav-link ${activeSection === item.href ? "active" : ""}`}
+              data-section={item.href}
+              className={`nav-link ${activeSection === item.href ? "active" : ""}`}
               onClick={() => handleNavigation(item.href)}
+              aria-current={activeSection === item.href ? "true" : undefined}
             >
               {item.label}
             </button>
           ))}
+        </nav>
+
+        {/* Mobile hamburger */}
+        <button
+          ref={menuButtonRef}
+          className={`mobile-menu-button ${isMenuOpen ? "open" : ""}`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-nav-menu"
+        >
+          <span className="hamburger-line" />
+          <span className="hamburger-line" />
+          <span className="hamburger-line" />
+        </button>
+
+        {/* Mobile drawer */}
+        <div
+          ref={menuRef}
+          id="mobile-nav-menu"
+          className={`mobile-menu ${isMenuOpen ? "open" : ""}`}
+          role="dialog"
+          aria-modal={isMenuOpen ? "true" : undefined}
+          aria-label="Navigation menu"
+        >
+          <nav className="mobile-menu-content" aria-label="Mobile navigation">
+            {NAV_ITEMS.map((item) => (
+              <button
+                key={item.href}
+                className={`mobile-nav-link ${activeSection === item.href ? "active" : ""}`}
+                onClick={() => handleNavigation(item.href)}
+                aria-current={activeSection === item.href ? "true" : undefined}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 };
 

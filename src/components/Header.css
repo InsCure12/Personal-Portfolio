@@ -1,3 +1,23 @@
+/* ─── Skip Link ─── */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 10000;
+  padding: 0.75rem 1.5rem;
+  background: var(--neon-cyan, #00d4ff);
+  color: #000;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 /* ─── Floating Pill Navbar ─── */
 .navbar {
   position: fixed;
@@ -95,6 +115,11 @@
 .nav-link.active {
   color: #fff;
   text-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--neon-cyan, #00d4ff);
+  outline-offset: 2px;
 }
 
 /* ─── Mobile hamburger ─── */
@@ -214,6 +239,19 @@
   border-color: rgba(0, 212, 255, 0.35);
   box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
   text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+}
+
+.mobile-nav-link:focus-visible {
+  outline: 2px solid var(--neon-cyan, #00d4ff);
+  outline-offset: 2px;
+}
+
+/* Compact nav for smaller desktops */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .nav-link {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.8rem;
+  }
 }
 
 /* ─── Responsive ─── */
