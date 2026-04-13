@@ -497,7 +497,9 @@ const Particles = ({
       };
     };
 
-    initParticles();
+    let cleanup = () => {};
+    initParticles().then(fn => { if (fn) cleanup = fn; });
+    return () => cleanup();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     particleCount,
@@ -514,7 +516,7 @@ const Particles = ({
   ]);
 
   return (
-    <div ref={containerRef} className={`particles-container ${className}`} />
+    <div ref={containerRef} className={`particles-container${className ? ` ${className}` : ""}`} />
   );
 };
 
