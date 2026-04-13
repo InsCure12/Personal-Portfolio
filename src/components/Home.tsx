@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, Twitter, Instagram } from "lucide-react";
+import { Github, Linkedin, Mail, Instagram } from "lucide-react";
 import { motion } from "framer-motion";
 import ProfileCard from "./ProfileCard";
 import TextType from "./TextType";
@@ -34,6 +34,7 @@ const socialIcons = [
     delay: 0,
     target: "_blank",
     rel: "noopener noreferrer",
+    label: "GitHub",
   },
   {
     Icon: Linkedin,
@@ -41,6 +42,7 @@ const socialIcons = [
     delay: 0.1,
     target: "_blank",
     rel: "noopener noreferrer",
+    label: "LinkedIn",
   },
   {
     Icon: Mail,
@@ -48,14 +50,15 @@ const socialIcons = [
     delay: 0.2,
     target: "_blank",
     rel: "noopener noreferrer",
+    label: "Email",
   },
-  { Icon: Twitter, href: "#", delay: 0.3 },
   {
     Icon: Instagram,
     href: "https://www.instagram.com/adip.jpeg/",
     delay: 0.4,
     target: "_blank",
     rel: "noopener noreferrer",
+    label: "Instagram",
   },
 ];
 
@@ -134,16 +137,19 @@ const Home = () => {
             animate="visible"
             transition={{ delay: 0.8 }}
           >
-            {socialIcons.map(({ Icon, href, delay }, index) => (
+            {socialIcons.map(({ Icon, href, delay, label }) => (
               <motion.a
-                key={index}
+                key={label}
                 href={href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center transition-all duration-300 group hover:bg-white/20 hover:scale-110"
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.8 + delay, duration: 0.5 }}
+                aria-label={label}
               >
                 <Icon className="w-6 h-6 text-white group-hover:text-cyan-400 transition-colors duration-300" />
               </motion.a>
