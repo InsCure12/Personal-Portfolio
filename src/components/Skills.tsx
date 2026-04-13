@@ -19,6 +19,7 @@ import {
   SiGit,
   SiFigma,
 } from "react-icons/si";
+import type { IconType } from "react-icons";
 import { VscVscode } from "react-icons/vsc";
 import GradientText from "./GradientText";
 import "./Skills.css";
@@ -27,7 +28,7 @@ type SkillLevel = "Proficient" | "Experienced" | "Familiar";
 
 interface Skill {
   name: string;
-  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  icon: IconType;
   color: string;
   level: SkillLevel;
   category: "Frontend" | "Backend" | "Tools";
@@ -54,6 +55,7 @@ const skills: Skill[] = [
 ];
 
 const categories = ["All", "Frontend", "Backend", "Tools"] as const;
+type Category = (typeof categories)[number];
 
 const levelColors: Record<SkillLevel, string> = {
   Proficient: "var(--neon-cyan)",
@@ -79,7 +81,7 @@ const itemVariants = {
 };
 
 const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.15 });
 
   const filtered = activeCategory === "All"
@@ -118,14 +120,15 @@ const Skills = () => {
           animate={inView ? "visible" : "hidden"}
         >
           {categories.map((cat) => (
-            <button
+            <motion.button
               key={cat}
+              variants={itemVariants}
               className={`skills-filter-tab ${activeCategory === cat ? "active" : ""}`}
               onClick={() => setActiveCategory(cat)}
               aria-pressed={activeCategory === cat}
             >
               {cat}
-            </button>
+            </motion.button>
           ))}
         </motion.div>
 
