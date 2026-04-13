@@ -261,8 +261,10 @@
 }
 
 .timeline-dot-icon {
-  font-size: 0.95rem;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
 }
 
 /* ── Responsive: stack on mobile ── */
@@ -300,7 +302,7 @@
   }
 
   .timeline-dot-icon {
-    font-size: 0.85rem;
+    color: #fff;
   }
 
   .resume-header .animated-gradient-text {
@@ -347,7 +349,7 @@
   }
 
   .timeline-dot-icon {
-    font-size: 0.75rem;
+    color: #fff;
   }
 
   .timeline-left,

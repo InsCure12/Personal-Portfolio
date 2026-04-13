@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { GraduationCap, Briefcase, Camera } from "lucide-react";
 import GradientText from "./GradientText";
 import "./Resume.css";
 
@@ -8,7 +9,7 @@ interface ResumeItem {
   title: string;
   place: string;
   description: string;
-  icon: string;
+  icon: React.ReactNode;
   category: "education" | "experience";
 }
 
@@ -19,7 +20,7 @@ const timelineData: ResumeItem[] = [
     place: "SMAN 2 Denpasar",
     description:
       "Completed high school education with a focus on science and technology.",
-    icon: "🎓",
+    icon: <GraduationCap size={18} aria-hidden="true" />,
     category: "education",
   },
   {
@@ -28,7 +29,7 @@ const timelineData: ResumeItem[] = [
     place: "Freelance",
     description:
       "Capturing professional photography for events, portraits, and commercial projects.",
-    icon: "📷",
+    icon: <Camera size={18} aria-hidden="true" />,
     category: "experience",
   },
   {
@@ -37,7 +38,7 @@ const timelineData: ResumeItem[] = [
     place: "ITB STIKOM Bali",
     description:
       "Pursuing a degree in Information Technology Systems, covering software engineering, databases, and web technologies.",
-    icon: "🎓",
+    icon: <GraduationCap size={18} aria-hidden="true" />,
     category: "education",
   },
   {
@@ -46,7 +47,7 @@ const timelineData: ResumeItem[] = [
     place: "Balica Travel",
     description:
       "Building and maintaining web applications for a travel company, handling frontend development and UI/UX improvements.",
-    icon: "💼",
+    icon: <Briefcase size={18} aria-hidden="true" />,
     category: "experience",
   },
   {
@@ -55,7 +56,7 @@ const timelineData: ResumeItem[] = [
     place: "Hacktiv8",
     description:
       "Intensive bootcamp covering full-stack JavaScript development with modern frameworks and best practices.",
-    icon: "🎓",
+    icon: <GraduationCap size={18} aria-hidden="true" />,
     category: "education",
   },
   {
@@ -64,7 +65,7 @@ const timelineData: ResumeItem[] = [
     place: "Purwadhika Bootcamp",
     description:
       "Hands-on training in modern web development workflows, deployment, and collaborative engineering.",
-    icon: "🎓",
+    icon: <GraduationCap size={18} aria-hidden="true" />,
     category: "education",
   },
 ];
@@ -116,7 +117,7 @@ function TimelineCard({ item, index }: { item: ResumeItem; index: number }) {
           damping: 20,
         }}
       >
-        <span className="timeline-dot-icon">{item.icon}</span>
+        <span className="timeline-dot-icon" aria-label={item.category === "education" ? "Education" : "Experience"}>{item.icon}</span>
       </motion.div>
     </div>
   );
