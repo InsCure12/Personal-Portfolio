@@ -1,0 +1,114 @@
+.contact-section {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact-label {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--neon-cyan);
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  padding: 0.35rem 1rem;
+  border-radius: 6px;
+}
+
+.contact-heading .animated-gradient-text {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.contact-subtext {
+  font-size: 1.05rem;
+  color: var(--text-secondary, #94a3b8);
+  max-width: 450px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.contact-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius-card, 12px);
+  background: #25D366;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  margin-top: 0.5rem;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact-whatsapp-btn:hover {
+  background: #1ebe57;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.25);
+}
+
+.contact-whatsapp-btn:focus-visible {
+  outline: 2px solid #25D366;
+  outline-offset: 2px;
+}
+
+.contact-social-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.contact-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--glass-bg, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+  color: var(--text-secondary, #94a3b8);
+  text-decoration: none;
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact-social-link:hover {
+  color: var(--neon-cyan);
+  border-color: rgba(0, 212, 255, 0.3);
+  transform: scale(1.1);
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.15);
+}
+
+.contact-social-link:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 3rem 1rem;
+  }
+
+  .contact-heading .animated-gradient-text {
+    font-size: 2.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-whatsapp-btn,
+  .contact-social-link {
+    transition: none;
+  }
+}
