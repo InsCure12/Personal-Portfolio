@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Header from "./components/Header.tsx";
 import Home from "./components/Home.tsx";
@@ -12,6 +12,25 @@ const Resume = lazy(() => import("./components/Resume.tsx"));
 const Portfolio = lazy(() => import("./components/Portfolio.tsx"));
 
 function App() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(motionQuery.matches);
+    const handleMotionChange = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    motionQuery.addEventListener("change", handleMotionChange);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      motionQuery.removeEventListener("change", handleMotionChange);
+    };
+  }, []);
+
   return (
     <section
       style={{ position: "relative", height: "100vh", overflow: "hidden" }}
@@ -20,23 +39,24 @@ function App() {
         style={{ height: "100%", overflowY: "auto", padding: "0 1rem" }}
         className="main-scroll-container"
       >
-        <Particles
-          particleColors={["#00d4ff", "#00ffee"]}
-          particleCount={200}
-          particleSpread={10}
-          speed={0.1}
-          particleBaseSize={300}
-          moveParticlesOnHover={true}
-          particleHoverFactor={2}
-          alphaParticles={false}
-          disableRotation={false}
-          showLogos={true}
-        />
+        {!prefersReducedMotion && (
+          <Particles
+            particleColors={["#00d4ff", "#00ffee"]}
+            particleCount={isMobile ? 80 : 200}
+            particleSpread={10}
+            speed={0.1}
+            particleBaseSize={300}
+            moveParticlesOnHover={!isMobile}
+            particleHoverFactor={2}
+            alphaParticles={false}
+            disableRotation={false}
+            showLogos={true}
+          />
+        )}
 
         <Header />
 
-        {/* Single Page Layout */}
-        <main className="relative">
+        <main className="relative" id="main-content">
           <section id="home">
             <Home />
           </section>
@@ -46,16 +66,28 @@ function App() {
               <About />
             </section>
 
+            <section id="services">
+              {/* Services — added in Task 8 */}
+            </section>
+
             <section id="skills">
               <Skills />
+            </section>
+
+            <section id="portfolio">
+              <Portfolio />
             </section>
 
             <section id="resume">
               <Resume />
             </section>
 
-            <section id="portfolio">
-              <Portfolio />
+            <section id="testimonials">
+              {/* Testimonials — added in Task 9 */}
+            </section>
+
+            <section id="contact">
+              {/* Contact — added in Task 10 */}
             </section>
           </Suspense>
         </main>
