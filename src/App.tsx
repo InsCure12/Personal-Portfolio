@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Header from "./components/Header.tsx";
+import Footer from "./components/Footer.tsx";
 import Home from "./components/Home.tsx";
 import Particles from "./components/Particles.jsx";
 import GradualBlur from "./components/GradualBlur.jsx";
@@ -99,6 +100,7 @@ function App() {
               <Contact />
             </section>
           </Suspense>
+          <Footer />
         </main>
       </motion.div>
       <GradualBlur
