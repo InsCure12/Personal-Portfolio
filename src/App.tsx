@@ -10,6 +10,7 @@ const About = lazy(() => import("./components/About.tsx"));
 const Skills = lazy(() => import("./components/Skills.tsx"));
 const Resume = lazy(() => import("./components/Resume.tsx"));
 const Portfolio = lazy(() => import("./components/Portfolio.tsx"));
+const Services = lazy(() => import("./components/Services.tsx"));
 
 function App() {
   const [isMobile, setIsMobile] = useState(() =>
@@ -73,7 +74,7 @@ function App() {
             </section>
 
             <section id="services">
-              {/* Services — added in Task 8 */}
+              <Services />
             </section>
 
             <section id="skills">
