@@ -123,27 +123,6 @@
   white-space: nowrap;
 }
 
-/* Progress Bar */
-.skill-bar-container {
-  width: 100%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.skill-bar {
-  height: 100%;
-  border-radius: 3px;
-}
-
-/* Level Text */
-.skill-level {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.45);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
 
 /* Responsive */
 @media (max-width: 1024px) {
@@ -216,6 +195,52 @@
   .skill-icon {
     font-size: 1.3rem;
   }
+}
+
+/* ── Filter Tabs ── */
+.skills-filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.skills-filter-tab {
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.skills-filter-tab:hover {
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 212, 255, 0.2);
+}
+
+.skills-filter-tab.active {
+  color: #fff;
+  background: rgba(0, 212, 255, 0.15);
+  border-color: rgba(0, 212, 255, 0.3);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
+}
+
+.skills-filter-tab:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
+}
+
+/* ── Level Label ── */
+.skill-level-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* ── Reduced motion ── */

@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import {
   SiReact,
@@ -15,133 +16,56 @@ import {
   SiPhp,
   SiLaravel,
   SiPython,
+  SiGit,
+  SiFigma,
 } from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
 import GradientText from "./GradientText";
 import "./Skills.css";
 
+type SkillLevel = "Proficient" | "Experienced" | "Familiar";
+
 interface Skill {
   name: string;
-  icon: React.ComponentType<{
-    className?: string;
-    style?: React.CSSProperties;
-  }>;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   color: string;
-  level: number; // 0-100
-  category: string;
+  level: SkillLevel;
+  category: "Frontend" | "Backend" | "Tools";
 }
 
 const skills: Skill[] = [
-  // Frontend
-  {
-    name: "React",
-    icon: SiReact,
-    color: "#61DAFB",
-    level: 90,
-    category: "Frontend",
-  },
-  {
-    name: "TypeScript",
-    icon: SiTypescript,
-    color: "#3178C6",
-    level: 85,
-    category: "Frontend",
-  },
-  {
-    name: "JavaScript",
-    icon: SiJavascript,
-    color: "#F7DF1E",
-    level: 90,
-    category: "Frontend",
-  },
-  {
-    name: "HTML5",
-    icon: SiHtml5,
-    color: "#E34F26",
-    level: 95,
-    category: "Frontend",
-  },
-  {
-    name: "CSS3",
-    icon: SiCss3,
-    color: "#1572B6",
-    level: 90,
-    category: "Frontend",
-  },
-  {
-    name: "Tailwind CSS",
-    icon: SiTailwindcss,
-    color: "#06B6D4",
-    level: 85,
-    category: "Frontend",
-  },
-  {
-    name: "Next.js",
-    icon: SiNextdotjs,
-    color: "#ffffff",
-    level: 75,
-    category: "Frontend",
-  },
-  {
-    name: "Vite",
-    icon: SiVite,
-    color: "#646CFF",
-    level: 80,
-    category: "Frontend",
-  },
-  {
-    name: "Node.js",
-    icon: SiNodedotjs,
-    color: "#339933",
-    level: 35,
-    category: "Frontend",
-  },
-  {
-    name: "MySQL",
-    icon: SiMysql,
-    color: "#4479A1",
-    level: 30,
-    category: "Frontend",
-  },
-  {
-    name: "MongoDB",
-    icon: SiMongodb,
-    color: "#47A248",
-    level: 25,
-    category: "Frontend",
-  },
-  {
-    name: "PHP",
-    icon: SiPhp,
-    color: "#777BB4",
-    level: 30,
-    category: "Frontend",
-  },
-  {
-    name: "Laravel",
-    icon: SiLaravel,
-    color: "#FF2D20",
-    level: 30,
-    category: "Frontend",
-  },
-  {
-    name: "Python",
-    icon: SiPython,
-    color: "#3776AB",
-    level: 25,
-    category: "Frontend",
-  },
+  { name: "React", icon: SiReact, color: "#61DAFB", level: "Proficient", category: "Frontend" },
+  { name: "TypeScript", icon: SiTypescript, color: "#3178C6", level: "Proficient", category: "Frontend" },
+  { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E", level: "Proficient", category: "Frontend" },
+  { name: "HTML5", icon: SiHtml5, color: "#E34F26", level: "Proficient", category: "Frontend" },
+  { name: "CSS3", icon: SiCss3, color: "#1572B6", level: "Proficient", category: "Frontend" },
+  { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4", level: "Proficient", category: "Frontend" },
+  { name: "Next.js", icon: SiNextdotjs, color: "#ffffff", level: "Experienced", category: "Frontend" },
+  { name: "Vite", icon: SiVite, color: "#646CFF", level: "Experienced", category: "Frontend" },
+  { name: "Node.js", icon: SiNodedotjs, color: "#339933", level: "Familiar", category: "Backend" },
+  { name: "MySQL", icon: SiMysql, color: "#4479A1", level: "Familiar", category: "Backend" },
+  { name: "MongoDB", icon: SiMongodb, color: "#47A248", level: "Familiar", category: "Backend" },
+  { name: "PHP", icon: SiPhp, color: "#777BB4", level: "Familiar", category: "Backend" },
+  { name: "Laravel", icon: SiLaravel, color: "#FF2D20", level: "Familiar", category: "Backend" },
+  { name: "Python", icon: SiPython, color: "#3776AB", level: "Familiar", category: "Backend" },
+  { name: "Git", icon: SiGit, color: "#F05032", level: "Proficient", category: "Tools" },
+  { name: "Figma", icon: SiFigma, color: "#F24E1E", level: "Experienced", category: "Tools" },
+  { name: "VS Code", icon: VscVscode, color: "#007ACC", level: "Proficient", category: "Tools" },
 ];
 
-const categories = ["Frontend"];
+const categories = ["All", "Frontend", "Backend", "Tools"] as const;
+
+const levelColors: Record<SkillLevel, string> = {
+  Proficient: "var(--neon-cyan)",
+  Experienced: "var(--neon-green)",
+  Familiar: "var(--neon-purple)",
+};
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      delayChildren: 0.2,
-      staggerChildren: 0.06,
-    },
+    transition: { delayChildren: 0.2, staggerChildren: 0.06 },
   },
 };
 
@@ -150,23 +74,21 @@ const itemVariants = {
   visible: {
     y: 0,
     opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut" as const,
-    },
+    transition: { duration: 0.5, ease: "easeOut" as const },
   },
 };
 
 const Skills = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.15,
-  });
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.15 });
+
+  const filtered = activeCategory === "All"
+    ? skills
+    : skills.filter((s) => s.category === activeCategory);
 
   return (
     <div className="skills-section" ref={ref}>
       <div className="skills-container">
-        {/* Header */}
         <motion.div
           className="skills-header"
           variants={containerVariants}
@@ -188,59 +110,69 @@ const Skills = () => {
           </motion.p>
         </motion.div>
 
-        {/* Skills Grid */}
+        {/* Filter Tabs */}
         <motion.div
-          className="skills-category"
+          className="skills-filter-tabs"
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <div className="skills-grid">
-            {skills.map((skill) => (
-              <motion.div
-                key={skill.name}
-                className="skill-card"
-                variants={itemVariants}
-                whileHover={{
-                  scale: 1.05,
-                  y: -4,
-                  transition: { duration: 0.2 },
-                }}
-              >
-                <div
-                  className="skill-icon-wrapper"
-                  style={{
-                    boxShadow: `0 0 20px ${skill.color}30, 0 0 40px ${skill.color}15`,
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className={`skills-filter-tab ${activeCategory === cat ? "active" : ""}`}
+              onClick={() => setActiveCategory(cat)}
+              aria-pressed={activeCategory === cat}
+            >
+              {cat}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Skills Grid */}
+        <motion.div
+          className="skills-category"
+          layout
+        >
+          <AnimatePresence mode="popLayout">
+            <motion.div className="skills-grid" layout>
+              {filtered.map((skill) => (
+                <motion.div
+                  key={skill.name}
+                  className="skill-card"
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  whileHover={{
+                    scale: 1.05,
+                    y: -4,
+                    transition: { duration: 0.2 },
                   }}
                 >
-                  <skill.icon
-                    className="skill-icon"
-                    style={{ color: skill.color }}
-                  />
-                </div>
-                <span className="skill-name">{skill.name}</span>
-                <div className="skill-bar-container">
-                  <motion.div
-                    className="skill-bar"
+                  <div
+                    className="skill-icon-wrapper"
                     style={{
-                      background: `linear-gradient(90deg, ${skill.color}, ${skill.color}99)`,
-                      boxShadow: `0 0 8px ${skill.color}50`,
+                      boxShadow: `0 0 20px ${skill.color}30, 0 0 40px ${skill.color}15`,
                     }}
-                    initial={{ width: 0 }}
-                    animate={
-                      inView ? { width: `${skill.level}%` } : { width: 0 }
-                    }
-                    transition={{
-                      duration: 1,
-                      delay: 0.3,
-                      ease: "easeOut",
-                    }}
-                  />
-                </div>
-                <span className="skill-level">{skill.level}%</span>
-              </motion.div>
-            ))}
-          </div>
+                  >
+                    <skill.icon
+                      className="skill-icon"
+                      style={{ color: skill.color }}
+                    />
+                  </div>
+                  <span className="skill-name">{skill.name}</span>
+                  <span
+                    className="skill-level-label"
+                    style={{ color: levelColors[skill.level] }}
+                  >
+                    {skill.level}
+                  </span>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </motion.div>
       </div>
     </div>
