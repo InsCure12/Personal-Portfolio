@@ -37,6 +37,8 @@
   padding-bottom: 0.5rem;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  /* Constrain to ~2 cards wide so the 3rd peeks and scroll activates on all viewports */
+  max-width: calc(320px * 2 + 1.5rem);
 }
 
 .testimonials-track::-webkit-scrollbar {
