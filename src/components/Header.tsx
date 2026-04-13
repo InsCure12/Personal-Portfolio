@@ -23,13 +23,16 @@ const Header = () => {
   const navRef = useRef<HTMLElement>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
   const isManualScroll = useRef(false);
+  const manualScrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  const activeSectionRef = useRef(activeSection);
 
   const moveIndicator = useCallback(() => {
     if (!navRef.current || !indicatorRef.current) return;
     const activeBtn = navRef.current.querySelector(
-      `.nav-link[data-section="${activeSection}"]`,
+      `.nav-link[data-section="${activeSectionRef.current}"]`,
     ) as HTMLElement | null;
     if (activeBtn) {
       const navRect = navRef.current.getBoundingClientRect();
@@ -38,13 +41,19 @@ const Header = () => {
       indicatorRef.current.style.transform = `translateX(${btnRect.left - navRect.left}px)`;
       indicatorRef.current.style.opacity = "1";
     }
-  }, [activeSection]);
+  }, []);
 
+  // Register resize listener once
   useEffect(() => {
-    moveIndicator();
     window.addEventListener("resize", moveIndicator);
     return () => window.removeEventListener("resize", moveIndicator);
   }, [moveIndicator]);
+
+  // Update ref and call moveIndicator when section changes
+  useEffect(() => {
+    activeSectionRef.current = activeSection;
+    moveIndicator();
+  }, [activeSection, moveIndicator]);
 
   // Scroll-spy
   useEffect(() => {
@@ -93,6 +102,7 @@ const Header = () => {
         const focusable = menuRef.current.querySelectorAll<HTMLElement>(
           'button, [href], [tabindex]:not([tabindex="-1"])'
         );
+        if (focusable.length === 0) { e.preventDefault(); return; }
         const first = focusable[0];
         const last = focusable[focusable.length - 1];
 
@@ -124,7 +134,8 @@ const Header = () => {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    setTimeout(() => {
+    if (manualScrollTimer.current) clearTimeout(manualScrollTimer.current);
+    manualScrollTimer.current = setTimeout(() => {
       isManualScroll.current = false;
     }, 800);
 
