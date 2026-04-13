@@ -26,7 +26,7 @@ export default defineConfig({
             return "vendor-motion";
           }
           if (id.includes("node_modules/ogl")) {
-            return "vendor-three";
+            return "vendor-ogl";
           }
           if (id.includes("node_modules/gsap")) {
             return "vendor-gsap";
