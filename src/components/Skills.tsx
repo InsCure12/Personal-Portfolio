@@ -130,48 +130,43 @@ const Skills = () => {
         </motion.div>
 
         {/* Skills Grid */}
-        <motion.div
-          className="skills-category"
-          layout
-        >
+        <motion.div className="skills-grid" layout>
           <AnimatePresence mode="popLayout">
-            <motion.div className="skills-grid" layout>
-              {filtered.map((skill) => (
-                <motion.div
-                  key={skill.name}
-                  className="skill-card"
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                  whileHover={{
-                    scale: 1.05,
-                    y: -4,
-                    transition: { duration: 0.2 },
+            {filtered.map((skill) => (
+              <motion.div
+                key={skill.name}
+                className="skill-card"
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                whileHover={{
+                  scale: 1.05,
+                  y: -4,
+                  transition: { duration: 0.2 },
+                }}
+              >
+                <div
+                  className="skill-icon-wrapper"
+                  style={{
+                    boxShadow: `0 0 20px ${skill.color}30, 0 0 40px ${skill.color}15`,
                   }}
                 >
-                  <div
-                    className="skill-icon-wrapper"
-                    style={{
-                      boxShadow: `0 0 20px ${skill.color}30, 0 0 40px ${skill.color}15`,
-                    }}
-                  >
-                    <skill.icon
-                      className="skill-icon"
-                      style={{ color: skill.color }}
-                    />
-                  </div>
-                  <span className="skill-name">{skill.name}</span>
-                  <span
-                    className="skill-level-label"
-                    style={{ color: levelColors[skill.level] }}
-                  >
-                    {skill.level}
-                  </span>
-                </motion.div>
-              ))}
-            </motion.div>
+                  <skill.icon
+                    className="skill-icon"
+                    style={{ color: skill.color }}
+                  />
+                </div>
+                <span className="skill-name">{skill.name}</span>
+                <span
+                  className="skill-level-label"
+                  style={{ color: levelColors[skill.level] }}
+                >
+                  {skill.level}
+                </span>
+              </motion.div>
+            ))}
           </AnimatePresence>
         </motion.div>
       </div>
