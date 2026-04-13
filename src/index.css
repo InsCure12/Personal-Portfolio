@@ -83,6 +83,16 @@ body {
   --dark-bg: #0a0a0f;
   --dark-card: #111118;
   --dark-border: #233554;
+
+  /* Glassmorphism tokens */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: 12px;
+  --radius-card: 12px;
+  --radius-inner: 8px;
+
+  /* Secondary text color */
+  --text-secondary: #94a3b8;
 }
 
 @layer base {
@@ -91,6 +101,7 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
