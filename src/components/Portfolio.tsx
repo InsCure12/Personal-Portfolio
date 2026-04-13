@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import GradientText from "./GradientText";
 import "./Portfolio.css";
@@ -24,9 +24,8 @@ const projects: Project[] = [
     image: imgPhotography,
     title: "Photography Landing Page",
     tech: "React & Node.js",
-    category: "Web App",
-    description:
-      "Full-stack photography portfolio with dynamic galleries and contact system.",
+    category: "Web",
+    description: "Full-stack photography portfolio with dynamic galleries and contact system.",
     url: "https://photography-portfolio-ten-gamma.vercel.app",
     color: "#00d4ff",
   },
@@ -34,9 +33,8 @@ const projects: Project[] = [
     image: imgCrypto,
     title: "Crypto Dashboard",
     tech: "React & TypeScript",
-    category: "Web App",
-    description:
-      "Real-time cryptocurrency dashboard with live data feeds and interactive charts.",
+    category: "Web",
+    description: "Real-time cryptocurrency dashboard with live data feeds and interactive charts.",
     url: "https://dashboard-cypto-app.netlify.app",
     color: "#64ffda",
   },
@@ -44,9 +42,8 @@ const projects: Project[] = [
     image: imgPortfolio,
     title: "Personal Portfolio",
     tech: "React & TypeScript",
-    category: "Landing Page",
-    description:
-      "Modern personal portfolio with animations, particles, and glassmorphism design.",
+    category: "Design",
+    description: "Modern personal portfolio with animations, particles, and glassmorphism design.",
     url: "https://mahadiputra-portfolio.vercel.app",
     color: "#a855f7",
   },
@@ -54,9 +51,8 @@ const projects: Project[] = [
     image: imgPcBuilder,
     title: "PC Builder Simulation",
     tech: "TypeScript",
-    category: "Web App",
-    description:
-      "Interactive PC building simulator for choosing and comparing components.",
+    category: "Web",
+    description: "Interactive PC building simulator for choosing and comparing components.",
     url: "https://pc-builder-simulation.vercel.app",
     color: "#f59e0b",
   },
@@ -64,22 +60,21 @@ const projects: Project[] = [
     image: imgBalanceUp,
     title: "BalanceUp",
     tech: "TypeScript & Firebase",
-    category: "Web App",
-    description:
-      "Expense tracking application with Firebase backend and real-time sync.",
+    category: "Web",
+    description: "Expense tracking application with Firebase backend and real-time sync.",
     url: "https://balanceup-tracker.vercel.app",
     color: "#ff6b6b",
   },
 ];
 
-/* ── Carousel Card ── */
-function CarouselCard({
+const filterCategories = ["All", "Web", "Design"] as const;
+
+/* ── Grid Card ── */
+function GridCard({
   project,
-  index,
   onSelect,
 }: {
   project: Project;
-  index: number;
   onSelect: (p: Project) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -87,36 +82,45 @@ function CarouselCard({
 
   return (
     <motion.div
-      className="carousel-card"
+      className="portfolio-grid-card"
       ref={ref}
+      layout
       style={{ "--accent": project.color } as React.CSSProperties}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <div className="carousel-card-image" onClick={() => onSelect(project)}>
-        <img src={project.image} alt={project.title} loading="lazy" />
+      <div
+        className="portfolio-grid-card-image"
+        onClick={() => onSelect(project)}
+        role="button"
+        tabIndex={0}
+        aria-label={`View details for ${project.title}`}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(project); } }}
+      >
+        <img
+          src={project.image}
+          alt={`Screenshot of ${project.title}`}
+          loading="lazy"
+          width={600}
+          height={375}
+        />
+        <div className="portfolio-grid-card-overlay">
+          <p className="portfolio-grid-card-overlay-text">{project.description}</p>
+        </div>
       </div>
-      <div className="carousel-card-info">
-        <div className="carousel-card-text">
-          <h3 className="carousel-card-title">{project.title}</h3>
-          <p className="carousel-card-tech">{project.tech}</p>
+      <div className="portfolio-grid-card-info">
+        <div className="portfolio-grid-card-text">
+          <h3 className="portfolio-grid-card-title">{project.title}</h3>
+          <p className="portfolio-grid-card-tech">{project.tech}</p>
         </div>
         <button
-          className="carousel-card-arrow"
+          className="portfolio-grid-card-arrow"
           onClick={() => onSelect(project)}
           aria-label={`View ${project.title}`}
         >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M7 17L17 7" />
             <path d="M7 7h10v10" />
           </svg>
@@ -134,6 +138,50 @@ function ProjectModal({
   project: Project;
   onClose: () => void;
 }) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousFocus = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    previousFocus.current = document.activeElement as HTMLElement;
+
+    const closeBtn = modalRef.current?.querySelector<HTMLElement>(".modal-close");
+    closeBtn?.focus();
+
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (e.key === "Tab" && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, a[href], [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) { e.preventDefault(); return; }
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+      previousFocus.current?.focus();
+    };
+  }, [onClose]);
+
   return (
     <motion.div
       className="modal-backdrop"
@@ -144,6 +192,7 @@ function ProjectModal({
       onClick={onClose}
     >
       <motion.div
+        ref={modalRef}
         className="modal-content"
         style={{ "--accent": project.color } as React.CSSProperties}
         initial={{ opacity: 0, scale: 0.92, y: 30 }}
@@ -151,25 +200,19 @@ function ProjectModal({
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label={project.title}
       >
-        <button className="modal-close" onClick={onClose} aria-label="Close">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
+        <button className="modal-close" onClick={onClose} aria-label="Close dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         </button>
 
         <div className="modal-image">
-          <img src={project.image} alt={project.title} />
+          <img src={project.image} alt={`Screenshot of ${project.title}`} />
         </div>
 
         <div className="modal-body">
@@ -186,16 +229,7 @@ function ProjectModal({
             rel="noopener noreferrer"
           >
             View Live Project
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M7 17L17 7" />
               <path d="M7 7h10v10" />
             </svg>
@@ -207,65 +241,19 @@ function ProjectModal({
 }
 
 /* ── Main Component ── */
-const CARDS_PER_PAGE = 3;
-
 const Portfolio = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [currentPage, setCurrentPage] = useState(0);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const [activeFilter, setActiveFilter] = useState<string>("All");
 
-  const totalPages = Math.ceil(projects.length / CARDS_PER_PAGE);
-
-  /* Scroll to current page */
-  const scrollToPage = useCallback(
-    (page: number) => {
-      if (!trackRef.current) return;
-      const clampedPage = Math.max(0, Math.min(page, totalPages - 1));
-      setCurrentPage(clampedPage);
-      const card = trackRef.current.children[clampedPage * CARDS_PER_PAGE] as
-        | HTMLElement
-        | undefined;
-      if (card) {
-        trackRef.current.scrollTo({
-          left: card.offsetLeft - trackRef.current.offsetLeft,
-          behavior: "smooth",
-        });
-      }
-    },
-    [totalPages],
-  );
-
-  /* Sync dots on manual scroll */
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    let ticking = false;
-    const handleScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const scrollLeft = track.scrollLeft;
-        const cardWidth = (track.children[0] as HTMLElement)?.offsetWidth ?? 1;
-        const gap = 24;
-        const page = Math.round(
-          scrollLeft / ((cardWidth + gap) * CARDS_PER_PAGE),
-        );
-        setCurrentPage(Math.max(0, Math.min(page, totalPages - 1)));
-        ticking = false;
-      });
-    };
-
-    track.addEventListener("scroll", handleScroll, { passive: true });
-    return () => track.removeEventListener("scroll", handleScroll);
-  }, [totalPages]);
+  const filtered = activeFilter === "All"
+    ? projects
+    : projects.filter((p) => p.category === activeFilter);
 
   return (
     <div className="portfolio-section" id="portfolio">
       <div className="portfolio-container">
-        {/* Header — left aligned like reference */}
         <motion.div
           className="portfolio-header"
           ref={headerRef}
@@ -277,34 +265,34 @@ const Portfolio = () => {
           <GradientText>Recent Projects</GradientText>
         </motion.div>
 
-        {/* Carousel */}
-        <div className="carousel-wrapper">
-          <div className="carousel-track" ref={trackRef}>
-            {projects.map((project, i) => (
-              <CarouselCard
+        {/* Filter Tabs */}
+        <div className="portfolio-filter-tabs">
+          {filterCategories.map((cat) => (
+            <button
+              key={cat}
+              className={`portfolio-filter-tab ${activeFilter === cat ? "active" : ""}`}
+              onClick={() => setActiveFilter(cat)}
+              aria-pressed={activeFilter === cat}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Grid */}
+        <motion.div className="portfolio-grid" layout>
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project) => (
+              <GridCard
                 key={project.title}
                 project={project}
-                index={i}
                 onSelect={setSelectedProject}
               />
             ))}
-          </div>
-
-          {/* Dots */}
-          <div className="carousel-dots">
-            {Array.from({ length: totalPages }).map((_, i) => (
-              <button
-                key={i}
-                className={`carousel-dot ${currentPage === i ? "active" : ""}`}
-                onClick={() => scrollToPage(i)}
-                aria-label={`Go to page ${i + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+          </AnimatePresence>
+        </motion.div>
       </div>
 
-      {/* Modal */}
       <AnimatePresence>
         {selectedProject && (
           <ProjectModal
