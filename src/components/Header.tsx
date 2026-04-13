@@ -175,7 +175,7 @@ const Header = () => {
           id="mobile-nav-menu"
           className={`mobile-menu ${isMenuOpen ? "open" : ""}`}
           role="dialog"
-          aria-modal={isMenuOpen ? "true" : undefined}
+          aria-modal="true"
           aria-label="Navigation menu"
         >
           <nav className="mobile-menu-content" aria-label="Mobile navigation">
