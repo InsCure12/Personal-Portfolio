@@ -43,10 +43,10 @@ function App() {
 
   return (
     <section
-      style={{ position: "relative", height: "100vh", overflow: "hidden" }}
+      style={{ position: "relative", height: "100vh", overflow: "hidden", maxWidth: "100vw" }}
     >
       <motion.div
-        style={{ height: "100%", overflowY: "auto", padding: "0 1rem" }}
+        style={{ height: "100%", overflowY: "auto", overflowX: "hidden", padding: "0 1rem", touchAction: "pan-y" }}
         className="main-scroll-container"
       >
         {!prefersReducedMotion && (
