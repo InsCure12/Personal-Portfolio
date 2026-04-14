@@ -1,0 +1,61 @@
+<h2>Section 1: Portfolio Carousel Redesign</h2>
+<p class="subtitle">Replacing the clunky carousel with a better interaction pattern. Which approach do you prefer?</p>
+
+<div class="options">
+  <div class="option" data-choice="improved-carousel" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Improved Carousel (Keep Pattern, Fix UX)</h3>
+      <p>Keep the horizontal carousel but fix everything wrong with it:</p>
+      <ul style="margin: 8px 0; padding-left: 20px; color: #aaa; font-size: 0.9em;">
+        <li>Smooth snap scrolling with CSS <code>scroll-snap-type</code></li>
+        <li>Arrow buttons (left/right) for desktop navigation</li>
+        <li>Keyboard navigation (arrow keys)</li>
+        <li>Proper dot indicators synced to scroll position</li>
+        <li>Touch swipe on mobile with momentum</li>
+        <li>Modal with focus trap and Escape to close</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="option" data-choice="filter-grid" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Filterable Grid <span style="color: var(--accent); font-size: 0.8em;">(Recommended)</span></h3>
+      <p>Replace the carousel with a responsive grid + category filter tabs:</p>
+      <ul style="margin: 8px 0; padding-left: 20px; color: #aaa; font-size: 0.9em;">
+        <li>Filter tabs: All / Web / Mobile / Design</li>
+        <li>Responsive grid (3 cols desktop → 2 tablet → 1 mobile)</li>
+        <li>Animated card entrance with Framer Motion <code>layoutId</code></li>
+        <li>Hover reveals project summary overlay</li>
+        <li>Click opens detail modal (same as current, but with focus trap + keyboard)</li>
+        <li>No scroll sync bugs — everything visible at once</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 32px;">
+  <h3>Modal improvements (applies to both)</h3>
+  <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 250px; padding: 16px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+      <p class="label" style="color: #f87171;">Current Issues</p>
+      <ul style="padding-left: 16px; color: #aaa; font-size: 0.85em;">
+        <li>No focus trap — Tab key escapes modal</li>
+        <li>No Escape key to close</li>
+        <li>Background still scrollable</li>
+        <li>No transition animation</li>
+      </ul>
+    </div>
+    <div style="flex: 1; min-width: 250px; padding: 16px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+      <p class="label" style="color: #4ade80;">Proposed Fix</p>
+      <ul style="padding-left: 16px; color: #aaa; font-size: 0.85em;">
+        <li>Focus trap on open, restore on close</li>
+        <li>Escape key closes modal</li>
+        <li><code>overflow: hidden</code> on body when open</li>
+        <li>Scale + fade entrance animation</li>
+        <li>Click outside (scrim) to dismiss</li>
+      </ul>
+    </div>
+  </div>
+</div>

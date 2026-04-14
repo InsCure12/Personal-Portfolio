@@ -1,0 +1,80 @@
+<h2>Section 4: Performance & Accessibility</h2>
+<p class="subtitle">Making the site fast and usable for everyone.</p>
+
+<div class="section">
+  <h3>Performance Optimizations</h3>
+  <div style="padding: 16px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+    <div style="margin-bottom: 16px;">
+      <p style="color: #fff; font-size: 0.95em; font-weight: 600; margin: 0;">WebGL Particles</p>
+      <p style="color: #aaa; font-size: 0.85em; margin: 4px 0 0;">Currently 200 particles on all devices. Proposal:</p>
+      <ul style="padding-left: 18px; color: #aaa; font-size: 0.85em; line-height: 1.8;">
+        <li>Desktop: keep 200 particles</li>
+        <li>Mobile: reduce to <strong style="color: #fff;">80 particles</strong> (saves battery, smoother scrolling)</li>
+        <li>Add <code style="color: #00d4ff;">prefers-reduced-motion</code> check — disable particles entirely if set</li>
+      </ul>
+    </div>
+    <div style="margin-bottom: 16px;">
+      <p style="color: #fff; font-size: 0.95em; font-weight: 600; margin: 0;">Bundle Size</p>
+      <p style="color: #aaa; font-size: 0.85em; margin: 4px 0 0;">Three.js + @react-three/fiber are bundled but never used in the app. Removing them saves ~200KB+ gzipped.</p>
+    </div>
+    <div style="margin-bottom: 16px;">
+      <p style="color: #fff; font-size: 0.95em; font-weight: 600; margin: 0;">Image Optimization</p>
+      <ul style="padding-left: 18px; color: #aaa; font-size: 0.85em; line-height: 1.8;">
+        <li>Add <code style="color: #00d4ff;">loading="lazy"</code> to project screenshots</li>
+        <li>Add explicit <code style="color: #00d4ff;">width</code> / <code style="color: #00d4ff;">height</code> to prevent CLS (layout shift)</li>
+        <li>Use <code style="color: #00d4ff;">aspect-ratio</code> CSS for responsive image containers</li>
+      </ul>
+    </div>
+    <div>
+      <p style="color: #fff; font-size: 0.95em; font-weight: 600; margin: 0;">Font Loading</p>
+      <ul style="padding-left: 18px; color: #aaa; font-size: 0.85em; line-height: 1.8;">
+        <li>Preload Inter variable font</li>
+        <li>Use <code style="color: #00d4ff;">font-display: swap</code> to avoid invisible text</li>
+        <li>System font fallback sized to match Inter metrics</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 28px;">
+  <h3>Accessibility Improvements</h3>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div style="padding: 16px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+      <p style="color: #00d4ff; font-size: 0.8em; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin: 0;">Navigation</p>
+      <ul style="padding-left: 16px; color: #aaa; font-size: 0.85em; line-height: 1.8; margin-top: 8px;">
+        <li>Skip-to-main-content link</li>
+        <li>Keyboard nav for header menu</li>
+        <li>Visible focus rings on all interactive elements</li>
+        <li>Focus trap in mobile drawer</li>
+      </ul>
+    </div>
+    <div style="padding: 16px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+      <p style="color: #64ffda; font-size: 0.8em; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin: 0;">Portfolio Modal</p>
+      <ul style="padding-left: 16px; color: #aaa; font-size: 0.85em; line-height: 1.8; margin-top: 8px;">
+        <li>Focus trap when open</li>
+        <li>Escape key closes</li>
+        <li>Restore focus on close</li>
+        <li><code>aria-modal="true"</code></li>
+        <li>Body scroll lock</li>
+      </ul>
+    </div>
+    <div style="padding: 16px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+      <p style="color: #a855f7; font-size: 0.8em; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin: 0;">Images & Icons</p>
+      <ul style="padding-left: 16px; color: #aaa; font-size: 0.85em; line-height: 1.8; margin-top: 8px;">
+        <li>Alt text on all meaningful images</li>
+        <li>Decorative images: <code>alt=""</code></li>
+        <li>Replace emoji with SVG + aria-label</li>
+        <li>Icon buttons get <code>aria-label</code></li>
+      </ul>
+    </div>
+    <div style="padding: 16px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+      <p style="color: #ffd93d; font-size: 0.8em; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin: 0;">Semantic HTML</p>
+      <ul style="padding-left: 16px; color: #aaa; font-size: 0.85em; line-height: 1.8; margin-top: 8px;">
+        <li>Proper heading hierarchy (h1→h6)</li>
+        <li>Use <code>&lt;main&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code></li>
+        <li>ARIA landmarks for screen readers</li>
+        <li>Reduced motion support on all animations</li>
+      </ul>
+    </div>
+  </div>
+</div>

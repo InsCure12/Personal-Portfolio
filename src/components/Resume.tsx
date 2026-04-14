@@ -15,35 +15,17 @@ interface ResumeItem {
 
 const timelineData: ResumeItem[] = [
   {
-    date: "2021 – 2023",
-    title: "High School",
-    place: "SMAN 2 Denpasar",
+    date: "2026 – Present",
+    title: "Full Stack Developer (Remote)",
+    place: "Gores Digital Technology",
     description:
-      "Completed high school education with a focus on science and technology.",
-    icon: <GraduationCap size={18} aria-hidden="true" />,
-    category: "education",
-  },
-  {
-    date: "2023 – Present",
-    title: "Freelance Photographer",
-    place: "Freelance",
-    description:
-      "Capturing professional photography for events, portraits, and commercial projects.",
-    icon: <Camera size={18} aria-hidden="true" />,
+      "Building scalable web applications and APIs, collaborating with cross-functional teams to deliver high-quality software solutions.",
+    icon: <Briefcase size={18} aria-hidden="true" />,
     category: "experience",
   },
   {
     date: "2023 – Present",
-    title: "Technology Information System",
-    place: "ITB STIKOM Bali",
-    description:
-      "Pursuing a degree in Information Technology Systems, covering software engineering, databases, and web technologies.",
-    icon: <GraduationCap size={18} aria-hidden="true" />,
-    category: "education",
-  },
-  {
-    date: "2023 – Present",
-    title: "Junior Web Developer",
+    title: "Junior Web Developer (Remote)",
     place: "Balica Travel",
     description:
       "Building and maintaining web applications for a travel company, handling frontend development and UI/UX improvements.",
@@ -65,6 +47,15 @@ const timelineData: ResumeItem[] = [
     place: "Purwadhika Bootcamp",
     description:
       "Hands-on training in modern web development workflows, deployment, and collaborative engineering.",
+    icon: <GraduationCap size={18} aria-hidden="true" />,
+    category: "education",
+  },
+  {
+    date: "2023 – Present",
+    title: "Technology Information System",
+    place: "ITB STIKOM Bali",
+    description:
+      "Pursuing a degree in Information Technology Systems, covering software engineering, databases, and web technologies.",
     icon: <GraduationCap size={18} aria-hidden="true" />,
     category: "education",
   },
@@ -117,7 +108,14 @@ function TimelineCard({ item, index }: { item: ResumeItem; index: number }) {
           damping: 20,
         }}
       >
-        <span className="timeline-dot-icon" aria-label={item.category === "education" ? "Education" : "Experience"}>{item.icon}</span>
+        <span
+          className="timeline-dot-icon"
+          aria-label={
+            item.category === "education" ? "Education" : "Experience"
+          }
+        >
+          {item.icon}
+        </span>
       </motion.div>
     </div>
   );

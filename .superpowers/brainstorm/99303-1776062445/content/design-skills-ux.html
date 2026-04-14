@@ -1,0 +1,75 @@
+<h2>Section 3: Skills Section & UX Fixes</h2>
+<p class="subtitle">Fixing the miscategorization and improving interaction across the site.</p>
+
+<div class="section">
+  <h3>Skills Section Reorganization</h3>
+  <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 280px; padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+      <p class="label" style="color: #f87171;">Current Problem</p>
+      <p style="color: #aaa; font-size: 0.9em;">All 14 skills listed under a single "Frontend" category — including Node.js, MySQL, MongoDB, PHP, Laravel, and Python. Misleading and unprofessional.</p>
+    </div>
+    <div style="flex: 1; min-width: 280px; padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+      <p class="label" style="color: #4ade80;">Proposed Fix</p>
+      <p style="color: #aaa; font-size: 0.9em;">Split into proper categories with filter tabs:</p>
+      <div style="margin-top: 12px;">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <span style="padding: 4px 12px; border-radius: 20px; background: rgba(0,212,255,0.15); color: #00d4ff; font-size: 0.8em;">All</span>
+          <span style="padding: 4px 12px; border-radius: 20px; background: rgba(0,212,255,0.08); color: #00d4ff; font-size: 0.8em;">Frontend</span>
+          <span style="padding: 4px 12px; border-radius: 20px; background: rgba(0,212,255,0.08); color: #00d4ff; font-size: 0.8em;">Backend</span>
+          <span style="padding: 4px 12px; border-radius: 20px; background: rgba(0,212,255,0.08); color: #00d4ff; font-size: 0.8em;">Tools</span>
+        </div>
+        <div style="margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+          <div style="padding: 8px; border-radius: 6px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);">
+            <p style="font-size: 0.75em; color: #00d4ff; margin: 0;">Frontend</p>
+            <p style="font-size: 0.8em; color: #aaa; margin: 4px 0 0;">React, Vue, HTML, CSS, JS, TS, Tailwind</p>
+          </div>
+          <div style="padding: 8px; border-radius: 6px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);">
+            <p style="font-size: 0.75em; color: #64ffda; margin: 0;">Backend</p>
+            <p style="font-size: 0.8em; color: #aaa; margin: 4px 0 0;">Node.js, PHP, Laravel, Python, MySQL, MongoDB</p>
+          </div>
+          <div style="padding: 8px; border-radius: 6px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);">
+            <p style="font-size: 0.75em; color: #a855f7; margin: 0;">Tools</p>
+            <p style="font-size: 0.8em; color: #aaa; margin: 4px 0 0;">Git, Figma, VS Code, etc.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 28px;">
+  <h3>Progress Bars → Skill Level Indicators</h3>
+  <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 280px; padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+      <p class="label" style="color: #f87171;">Current Problem</p>
+      <p style="color: #aaa; font-size: 0.9em;">Arbitrary percentages (React 90%, Node.js 35%) — feels inaccurate and invites scrutiny. What does "35% Node.js" even mean?</p>
+    </div>
+    <div style="flex: 1; min-width: 280px; padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+      <p class="label" style="color: #4ade80;">Proposed Options</p>
+      <div style="margin-top: 8px;">
+        <div style="padding: 8px 12px; border-radius: 6px; background: rgba(0,212,255,0.05); margin-bottom: 8px;">
+          <p style="font-size: 0.85em; color: #fff; margin: 0;"><strong>Option 1:</strong> Remove levels entirely</p>
+          <p style="font-size: 0.8em; color: #aaa; margin: 4px 0 0;">Just show skill icons + names in a clean grid. Let the portfolio projects speak for proficiency.</p>
+        </div>
+        <div style="padding: 8px 12px; border-radius: 6px; background: rgba(100,255,218,0.05);">
+          <p style="font-size: 0.85em; color: #fff; margin: 0;"><strong>Option 2:</strong> Use qualitative labels</p>
+          <p style="font-size: 0.8em; color: #aaa; margin: 4px 0 0;">Replace percentages with labels: "Proficient" / "Experienced" / "Familiar" — less precise, more honest.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 28px;">
+  <h3>Other UX Fixes</h3>
+  <div style="padding: 16px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);">
+    <ul style="padding-left: 18px; color: #aaa; font-size: 0.9em; line-height: 2;">
+      <li><strong style="color: #fff;">Resume timeline:</strong> Replace emoji icons (🎓 💼) with proper SVG icons from Lucide</li>
+      <li><strong style="color: #fff;">Mobile touch targets:</strong> Ensure all buttons/links are minimum 44×44px</li>
+      <li><strong style="color: #fff;">Social icons:</strong> Increase size from current 40px to 48px with proper hover states</li>
+      <li><strong style="color: #fff;">CTA buttons:</strong> Add loading state when "Download CV" is clicked</li>
+      <li><strong style="color: #fff;">About photo:</strong> Use responsive aspect-ratio instead of fixed 380×480px</li>
+      <li><strong style="color: #fff;">Header menu (mobile):</strong> Add smooth open/close animation, proper focus trap</li>
+    </ul>
+  </div>
+</div>

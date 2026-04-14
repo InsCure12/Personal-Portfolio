@@ -104,7 +104,7 @@ const About = () => {
                 />
                 <span className="about-stat-suffix">+</span>
               </span>
-              <span className="about-stat-label">Projects on Github</span>
+              <span className="about-stat-label">Projects finished</span>
             </div>
 
             <div className="about-stat-card">

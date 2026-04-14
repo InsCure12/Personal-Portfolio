@@ -5,15 +5,23 @@ import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import GradientText from "./GradientText";
 import "./Contact.css";
 
-const WHATSAPP_NUMBER = "6281234567890"; // Replace with actual number
+const WHATSAPP_NUMBER = "6282145419561"; // Replace with actual number
 const WHATSAPP_TEMPLATE = encodeURIComponent(
-  "Hi Adip! I came across your portfolio and would love to discuss a project. Let's connect!"
+  "Hi Adip! I came across your portfolio and would love to discuss a project. Let's connect!",
 );
 
 const socialLinks = [
   { icon: FaGithub, href: "https://github.com/InsCure12", label: "GitHub" },
-  { icon: FaLinkedin, href: "https://www.linkedin.com/in/i-putu-mahadiputra-udayana-7252012ab/", label: "LinkedIn" },
-  { icon: FaInstagram, href: "https://www.instagram.com/adip.jpeg/", label: "Instagram" },
+  {
+    icon: FaLinkedin,
+    href: "https://www.linkedin.com/in/i-putu-mahadiputra-udayana-7252012ab/",
+    label: "LinkedIn",
+  },
+  {
+    icon: FaInstagram,
+    href: "https://www.instagram.com/adip.jpeg/",
+    label: "Instagram",
+  },
 ];
 
 const Contact = () => {

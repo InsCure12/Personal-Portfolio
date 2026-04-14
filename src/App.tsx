@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Header from "./components/Header.tsx";
 import Footer from "./components/Footer.tsx";
 import Home from "./components/Home.tsx";
-import Particles from "./components/Particles.jsx";
+import LineWaves from "./components/LineWaves.jsx";
 import GradualBlur from "./components/GradualBlur.jsx";
 import "./App.css";
 
@@ -11,18 +11,17 @@ const About = lazy(() => import("./components/About.tsx"));
 const Skills = lazy(() => import("./components/Skills.tsx"));
 const Resume = lazy(() => import("./components/Resume.tsx"));
 const Portfolio = lazy(() => import("./components/Portfolio.tsx"));
-const Services = lazy(() => import("./components/Services.tsx"));
 const Testimonials = lazy(() => import("./components/Testimonials.tsx"));
 const Contact = lazy(() => import("./components/Contact.tsx"));
 
 function App() {
   const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth < 768 : false
+    typeof window !== "undefined" ? window.innerWidth < 768 : false,
   );
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(() =>
     typeof window !== "undefined"
       ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      : false
+      : false,
   );
 
   useEffect(() => {
@@ -32,7 +31,8 @@ function App() {
 
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(motionQuery.matches);
-    const handleMotionChange = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    const handleMotionChange = (e: MediaQueryListEvent) =>
+      setPrefersReducedMotion(e.matches);
     motionQuery.addEventListener("change", handleMotionChange);
 
     return () => {
@@ -50,18 +50,30 @@ function App() {
         className="main-scroll-container"
       >
         {!prefersReducedMotion && (
-          <Particles
-            particleColors={["#00d4ff", "#00ffee"]}
-            particleCount={isMobile ? 80 : 200}
-            particleSpread={10}
-            speed={0.1}
-            particleBaseSize={300}
-            moveParticlesOnHover={!isMobile}
-            particleHoverFactor={2}
-            alphaParticles={false}
-            disableRotation={false}
-            showLogos={true}
-          />
+          <div
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 0,
+              pointerEvents: isMobile ? "none" : "auto",
+            }}
+          >
+            <LineWaves
+              speed={0.3}
+              innerLineCount={32}
+              outerLineCount={36}
+              warpIntensity={1}
+              rotation={-45}
+              edgeFadeWidth={0}
+              colorCycleSpeed={1}
+              brightness={0.1}
+              color1="#00d4ff"
+              color2="#00ffaa"
+              color3="#a855f7"
+              enableMouseInteraction={!isMobile}
+              mouseInfluence={2}
+            />
+          </div>
         )}
 
         <Header />
@@ -74,10 +86,6 @@ function App() {
           <Suspense fallback={<div className="min-h-screen" />}>
             <section id="about">
               <About />
-            </section>
-
-            <section id="services">
-              <Services />
             </section>
 
             <section id="skills">

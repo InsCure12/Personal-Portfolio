@@ -4,10 +4,11 @@ import GradientText from "./GradientText";
 import "./Portfolio.css";
 
 import imgPhotography from "../assets/img/photography-web.png";
-import imgCrypto from "../assets/img/dashboard-crypto.png";
-import imgPortfolio from "../assets/img/personal-portfolio.png";
+import imgBalica from "../assets/img/balica-homepage.jpeg";
+import imgTerrapadel from "../assets/img/terrapadel-homepage.png";
 import imgPcBuilder from "../assets/img/pc-builder.png";
-import imgBalanceUp from "../assets/img/balanceup.png";
+import imgBalanceUp from "../assets/img/balanceup2.png";
+import imgJobsheet from "../assets/img/jobsheet.png";
 
 interface Project {
   image: string;
@@ -25,26 +26,29 @@ const projects: Project[] = [
     title: "Photography Landing Page",
     tech: "React & Node.js",
     category: "Web",
-    description: "Full-stack photography portfolio with dynamic galleries and contact system.",
+    description:
+      "Full-stack photography portfolio with dynamic galleries and contact system.",
     url: "https://photography-portfolio-ten-gamma.vercel.app",
     color: "#00d4ff",
   },
   {
-    image: imgCrypto,
-    title: "Crypto Dashboard",
+    image: imgBalica,
+    title: "Balica Travel Website",
     tech: "React & TypeScript",
     category: "Web",
-    description: "Real-time cryptocurrency dashboard with live data feeds and interactive charts.",
-    url: "https://dashboard-cypto-app.netlify.app",
+    description:
+      "Travel agency website with dynamic content, booking system, and responsive design.",
+    url: "https://balica-travel-website.netlify.app",
     color: "#64ffda",
   },
   {
-    image: imgPortfolio,
-    title: "Personal Portfolio",
-    tech: "React & TypeScript",
-    category: "Design",
-    description: "Modern personal portfolio with animations, particles, and glassmorphism design.",
-    url: "https://mahadiputra-portfolio.vercel.app",
+    image: imgTerrapadel,
+    title: "Terrapadel Website",
+    tech: "Next.JS & Tailwind CSS",
+    category: "Web",
+    description:
+      "Landing page for Terrapadel, a padel club, featuring dynamic content and responsive design.",
+    url: "#",
     color: "#a855f7",
   },
   {
@@ -52,7 +56,8 @@ const projects: Project[] = [
     title: "PC Builder Simulation",
     tech: "TypeScript",
     category: "Web",
-    description: "Interactive PC building simulator for choosing and comparing components.",
+    description:
+      "Interactive PC building simulator for choosing and comparing components.",
     url: "https://pc-builder-simulation.vercel.app",
     color: "#f59e0b",
   },
@@ -61,9 +66,20 @@ const projects: Project[] = [
     title: "BalanceUp",
     tech: "TypeScript & Firebase",
     category: "Web",
-    description: "Expense tracking application with Firebase backend and real-time sync.",
+    description:
+      "Expense tracking application with Firebase backend and real-time sync.",
     url: "https://balanceup-tracker.vercel.app",
     color: "#ff6b6b",
+  },
+  {
+    image: imgJobsheet,
+    title: "Freelance Tracking App",
+    tech: "Next.js & Tailwind CSS",
+    category: "Web",
+    description:
+      "Freelance tracking app with Next.js and Tailwind CSS for seamless project management.",
+    url: "#",
+    color: "#10b981",
   },
 ];
 
@@ -97,7 +113,12 @@ function GridCard({
         role="button"
         tabIndex={0}
         aria-label={`View details for ${project.title}`}
-        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(project); } }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onSelect(project);
+          }
+        }}
       >
         <img
           src={project.image}
@@ -107,7 +128,9 @@ function GridCard({
           height={375}
         />
         <div className="portfolio-grid-card-overlay">
-          <p className="portfolio-grid-card-overlay-text">{project.description}</p>
+          <p className="portfolio-grid-card-overlay-text">
+            {project.description}
+          </p>
         </div>
       </div>
       <div className="portfolio-grid-card-info">
@@ -120,7 +143,16 @@ function GridCard({
           onClick={() => onSelect(project)}
           aria-label={`View ${project.title}`}
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <path d="M7 17L17 7" />
             <path d="M7 7h10v10" />
           </svg>
@@ -144,7 +176,8 @@ function ProjectModal({
   useEffect(() => {
     previousFocus.current = document.activeElement as HTMLElement;
 
-    const closeBtn = modalRef.current?.querySelector<HTMLElement>(".modal-close");
+    const closeBtn =
+      modalRef.current?.querySelector<HTMLElement>(".modal-close");
     closeBtn?.focus();
 
     document.body.style.overflow = "hidden";
@@ -157,9 +190,12 @@ function ProjectModal({
 
       if (e.key === "Tab" && modalRef.current) {
         const focusable = modalRef.current.querySelectorAll<HTMLElement>(
-          'button, a[href], [tabindex]:not([tabindex="-1"])'
+          'button, a[href], [tabindex]:not([tabindex="-1"])',
         );
-        if (focusable.length === 0) { e.preventDefault(); return; }
+        if (focusable.length === 0) {
+          e.preventDefault();
+          return;
+        }
         const first = focusable[0];
         const last = focusable[focusable.length - 1];
 
@@ -204,8 +240,21 @@ function ProjectModal({
         aria-modal="true"
         aria-label={project.title}
       >
-        <button className="modal-close" onClick={onClose} aria-label="Close dialog">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <button
+          className="modal-close"
+          onClick={onClose}
+          aria-label="Close dialog"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
@@ -229,7 +278,16 @@ function ProjectModal({
             rel="noopener noreferrer"
           >
             View Live Project
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M7 17L17 7" />
               <path d="M7 7h10v10" />
             </svg>
@@ -248,9 +306,10 @@ const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const handleClose = useCallback(() => setSelectedProject(null), []);
 
-  const filtered = activeFilter === "All"
-    ? projects
-    : projects.filter((p) => p.category === activeFilter);
+  const filtered =
+    activeFilter === "All"
+      ? projects
+      : projects.filter((p) => p.category === activeFilter);
 
   return (
     <div className="portfolio-section" id="portfolio">
@@ -296,10 +355,7 @@ const Portfolio = () => {
 
       <AnimatePresence>
         {selectedProject && (
-          <ProjectModal
-            project={selectedProject}
-            onClose={handleClose}
-          />
+          <ProjectModal project={selectedProject} onClose={handleClose} />
         )}
       </AnimatePresence>
     </div>

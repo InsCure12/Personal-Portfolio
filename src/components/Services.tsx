@@ -48,7 +48,9 @@ const Services = () => {
           >
             <div
               className="service-icon-wrapper"
-              style={{ "--service-color": service.color } as React.CSSProperties}
+              style={
+                { "--service-color": service.color } as React.CSSProperties
+              }
             >
               <service.icon size={28} aria-hidden="true" />
             </div>

@@ -2,13 +2,18 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import "./Header.css";
 
 const SECTIONS = [
-  "home", "about", "services", "skills", "portfolio", "resume", "testimonials", "contact"
+  "home",
+  "about",
+  "skills",
+  "portfolio",
+  "resume",
+  "testimonials",
+  "contact",
 ] as const;
 
 const NAV_ITEMS = [
   { label: "Home", href: "home" },
   { label: "About", href: "about" },
-  { label: "Services", href: "services" },
   { label: "Skills", href: "skills" },
   { label: "Portfolio", href: "portfolio" },
   { label: "Resume", href: "resume" },
@@ -100,9 +105,12 @@ const Header = () => {
 
       if (e.key === "Tab" && menuRef.current) {
         const focusable = menuRef.current.querySelectorAll<HTMLElement>(
-          'button, [href], [tabindex]:not([tabindex="-1"])'
+          'button, [href], [tabindex]:not([tabindex="-1"])',
         );
-        if (focusable.length === 0) { e.preventDefault(); return; }
+        if (focusable.length === 0) {
+          e.preventDefault();
+          return;
+        }
         const first = focusable[0];
         const last = focusable[focusable.length - 1];
 

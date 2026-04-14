@@ -1,0 +1,86 @@
+<h2>How should we approach this?</h2>
+<p class="subtitle">Three strategies — same scope, different trade-offs. Pick the one that fits your goals.</p>
+
+<div class="options">
+  <div class="option" data-choice="surgical" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Surgical Fixes + New Sections <span style="color: var(--accent); font-size: 0.8em;">(Recommended)</span></h3>
+      <p><strong>Keep the current design DNA.</strong> Fix what's broken (carousel, skills categorization, accessibility, performance), add polish (Inter font, refined spacing), and bolt on the 4 new sections in the same neon/glassmorphism style.</p>
+      <div style="margin-top: 12px;">
+        <div style="display: flex; gap: 24px; font-size: 0.85em;">
+          <div>
+            <strong style="color: #4ade80;">Pros</strong>
+            <ul style="margin: 4px 0; padding-left: 16px; color: #aaa;">
+              <li>Lowest risk — preserves your existing work</li>
+              <li>Fastest to complete</li>
+              <li>No visual regression for returning visitors</li>
+            </ul>
+          </div>
+          <div>
+            <strong style="color: #f87171;">Cons</strong>
+            <ul style="margin: 4px 0; padding-left: 16px; color: #aaa;">
+              <li>Won't fix structural CSS issues (global styles)</li>
+              <li>Some components stay complex (ProfileCard)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="refresh" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Design Refresh</h3>
+      <p><strong>Same layout structure, elevated execution.</strong> Rework the styling system (CSS variables → Tailwind tokens), replace the carousel with a proper grid/masonry layout, upgrade all animations to be more subtle and performant, add new sections.</p>
+      <div style="margin-top: 12px;">
+        <div style="display: flex; gap: 24px; font-size: 0.85em;">
+          <div>
+            <strong style="color: #4ade80;">Pros</strong>
+            <ul style="margin: 4px 0; padding-left: 16px; color: #aaa;">
+              <li>Cleaner codebase going forward</li>
+              <li>Better maintainability</li>
+              <li>Portfolio section gets a proper redesign</li>
+            </ul>
+          </div>
+          <div>
+            <strong style="color: #f87171;">Cons</strong>
+            <ul style="margin: 4px 0; padding-left: 16px; color: #aaa;">
+              <li>More changes = more risk of regressions</li>
+              <li>Takes longer to implement</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="rebuild" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Full Rebuild</h3>
+      <p><strong>Start fresh with a new design system.</strong> Redesign from scratch using a cohesive Tailwind-first approach, proper component architecture, full accessibility baked in from day one, and all new sections included.</p>
+      <div style="margin-top: 12px;">
+        <div style="display: flex; gap: 24px; font-size: 0.85em;">
+          <div>
+            <strong style="color: #4ade80;">Pros</strong>
+            <ul style="margin: 4px 0; padding-left: 16px; color: #aaa;">
+              <li>Cleanest result — no legacy baggage</li>
+              <li>Best long-term maintainability</li>
+              <li>Accessibility built-in, not bolted on</li>
+            </ul>
+          </div>
+          <div>
+            <strong style="color: #f87171;">Cons</strong>
+            <ul style="margin: 4px 0; padding-left: 16px; color: #aaa;">
+              <li>Highest effort — essentially a new project</li>
+              <li>Risk of losing the "character" of current design</li>
+              <li>Takes significantly longer</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
