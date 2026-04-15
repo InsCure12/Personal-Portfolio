@@ -7,6 +7,7 @@ import LineWaves from "./components/LineWaves.jsx";
 import GradualBlur from "./components/GradualBlur.jsx";
 import "./App.css";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const About = lazy(() => import("./components/About.tsx"));
 const Skills = lazy(() => import("./components/Skills.tsx"));
@@ -123,6 +124,7 @@ function App() {
         opacity={1}
       />
       <Analytics />
+      <SpeedInsights />
     </section>
   );
 }
