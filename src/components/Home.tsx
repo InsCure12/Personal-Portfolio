@@ -54,7 +54,7 @@ const socialIcons = [
   },
   {
     Icon: Instagram,
-    href: "https://www.instagram.com/adip.jpeg/",
+    href: "https://www.instagram.com/adip.dev/",
     delay: 0.4,
     target: "_blank",
     rel: "noopener noreferrer",

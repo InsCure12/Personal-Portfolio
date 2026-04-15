@@ -5,7 +5,7 @@ import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import GradientText from "./GradientText";
 import "./Contact.css";
 
-const WHATSAPP_NUMBER = "6282145419561"; // Replace with actual number
+const WHATSAPP_NUMBER = "6285190810904"; // Replace with actual number
 const WHATSAPP_TEMPLATE = encodeURIComponent(
   "Hi Adip! I came across your portfolio and would love to discuss a project. Let's connect!",
 );
@@ -19,7 +19,7 @@ const socialLinks = [
   },
   {
     icon: FaInstagram,
-    href: "https://www.instagram.com/adip.jpeg/",
+    href: "https://www.instagram.com/adip.dev/",
     label: "Instagram",
   },
 ];
