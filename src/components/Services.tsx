@@ -9,14 +9,14 @@ const services = [
     icon: Code,
     title: "Web Development",
     description:
-      "Building responsive, performant web applications with modern frameworks and clean code.",
+      "From landing pages to full-stack apps — I deliver responsive, performant products built with React, Next.js, and TypeScript that scale.",
     color: "var(--neon-cyan)",
   },
   {
     icon: PenTool,
     title: "UI/UX Design",
     description:
-      "Crafting intuitive interfaces and user experiences that are beautiful, accessible, and functional.",
+      "Clean, intentional interfaces designed in Figma and brought to life with pixel-perfect precision. Beautiful and accessible by default.",
     color: "var(--neon-purple)",
   },
 ];

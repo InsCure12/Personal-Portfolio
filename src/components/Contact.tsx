@@ -7,7 +7,7 @@ import "./Contact.css";
 
 const WHATSAPP_NUMBER = "6285190810904"; // Replace with actual number
 const WHATSAPP_TEMPLATE = encodeURIComponent(
-  "Hi Adip! I came across your portfolio and would love to discuss a project. Let's connect!",
+  "Hi Adip! I came across your portfolio and I'd love to discuss a project with you. Are you available for a quick chat?",
 );
 
 const socialLinks = [
@@ -38,10 +38,12 @@ const Contact = () => {
       >
         <span className="contact-label">Get In Touch</span>
         <h2 className="contact-heading">
-          <GradientText>Let's Work Together</GradientText>
+          <GradientText>Let's Build Something Great</GradientText>
         </h2>
         <p className="contact-subtext">
-          Have a project in mind? Let's chat and bring your ideas to life.
+          Got a project, an idea, or just want to say hi? I'm open to
+          freelance work and collaborations — reach out and let's make
+          it happen.
         </p>
 
         <a

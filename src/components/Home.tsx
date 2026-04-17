@@ -103,9 +103,9 @@ const Home = () => {
               >
                 <TextType
                   text={[
-                    "FrontEnd Developer",
-                    "Coding Enthusiast",
-                    "Happy coding!",
+                    "Frontend Developer",
+                    "UI/UX Enthusiast",
+                    "Problem Solver",
                   ]}
                   speed={100}
                   deleteSpeed={50}
@@ -123,9 +123,9 @@ const Home = () => {
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.6 }}
             >
-              I create beautiful, responsive web applications with modern
-              technologies. Passionate about clean code and exceptional user
-              experiences.
+              I build fast, beautiful, and accessible web applications that
+              turn ideas into real products. Focused on clean code,
+              pixel-perfect interfaces, and experiences users actually enjoy.
             </motion.p>
           </motion.div>
 

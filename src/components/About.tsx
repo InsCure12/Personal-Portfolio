@@ -54,7 +54,7 @@ const About = () => {
           <span className="about-label">About Me</span>
 
           <h2 className="about-heading">
-            I Am Available For{" "}
+            Available for Freelance{" "}
             <GradientText
               colors={["#00d4ff", "#64ffda", "#00d4ff", "#64ffda", "#00d4ff"]}
               animationSpeed={10}
@@ -62,17 +62,16 @@ const About = () => {
               className="custom-class"
             >
               Web Development
-            </GradientText>{" "}
-            Project
+            </GradientText>
           </h2>
 
           <p className="about-bio">
             Hi, I&apos;m <strong>I Putu Mahadiputra Udayana</strong> &mdash; a
-            passionate and curious learner with a strong interest in information
-            technology and photography. I&apos;m currently exploring
-            programming, particularly how technology can solve real-world
-            problems, and I enjoy breaking down complex ideas into simple,
-            actionable solutions.
+            Frontend Developer from Bali with 2+ years of hands-on experience
+            building web applications that are fast, accessible, and a pleasure
+            to use. I specialise in React &amp; TypeScript, and I care deeply
+            about turning complex requirements into clean, maintainable code.
+            When I&apos;m not writing code, I&apos;m behind a camera.
           </p>
 
           {/* Stats cards */}
@@ -129,7 +128,7 @@ const About = () => {
               className="about-btn about-btn-primary"
               onClick={() =>
                 document
-                  .getElementById("portfolio")
+                  .getElementById("contact")
                   ?.scrollIntoView({ behavior: "smooth" })
               }
             >

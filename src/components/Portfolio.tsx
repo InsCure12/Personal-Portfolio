@@ -27,7 +27,7 @@ const projects: Project[] = [
     tech: "React & Node.js",
     category: "Web",
     description:
-      "Full-stack photography portfolio with dynamic galleries and contact system.",
+      "Full-stack photography portfolio with dynamic image galleries, category filtering, and a contact system — built to convert visitors into clients.",
     url: "https://photography-portfolio-ten-gamma.vercel.app",
     color: "#00d4ff",
   },
@@ -37,17 +37,17 @@ const projects: Project[] = [
     tech: "React & TypeScript",
     category: "Web",
     description:
-      "Travel agency website with dynamic content, booking system, and responsive design.",
+      "Travel agency site featuring dynamic destination content, an integrated booking flow, and a fully responsive layout optimised for mobile users.",
     url: "https://balica-travel-website.netlify.app",
     color: "#64ffda",
   },
   {
     image: imgTerrapadel,
-    title: "Terrapadel Website",
+    title: "Terra Padel Website",
     tech: "Next.JS & Tailwind CSS",
     category: "Web",
     description:
-      "Landing page for Terrapadel, a padel club, featuring dynamic content and responsive design.",
+      "Marketing site for a padel club with court showcase, membership info, and a clean design that drives bookings and builds brand authority.",
     url: "#",
     color: "#a855f7",
   },
@@ -57,7 +57,7 @@ const projects: Project[] = [
     tech: "TypeScript",
     category: "Web",
     description:
-      "Interactive PC building simulator for choosing and comparing components.",
+      "Interactive PC configurator that lets users select and compare components in real time, with live pricing and compatibility validation.",
     url: "https://pc-builder-simulation.vercel.app",
     color: "#f59e0b",
   },
@@ -67,17 +67,17 @@ const projects: Project[] = [
     tech: "TypeScript & Firebase",
     category: "Web",
     description:
-      "Expense tracking application with Firebase backend and real-time sync.",
+      "Personal finance tracker with real-time Firebase sync, expense categorisation, savings goals, and recurring transactions — all in a clean dashboard.",
     url: "https://balanceup-tracker.vercel.app",
     color: "#ff6b6b",
   },
   {
     image: imgJobsheet,
-    title: "Freelance Tracking App",
+    title: "FreelanceKu Tracker",
     tech: "Next.js & Tailwind CSS",
     category: "Web",
     description:
-      "Freelance tracking app with Next.js and Tailwind CSS for seamless project management.",
+      "Freelance management app for logging jobs, tracking invoices, and monitoring revenue — purpose-built for independent professionals.",
     url: "#",
     color: "#10b981",
   },
