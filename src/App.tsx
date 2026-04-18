@@ -80,33 +80,33 @@ function App() {
 
         <Header />
 
-        <main className="relative" id="main-content">
-          <section id="home">
+        <main className="relative" id="main-content" aria-label="Putu Adip — Frontend Developer Portfolio">
+          <section id="home" aria-label="Introduction — Putu Adip, Frontend Developer from Bali">
             <Home />
           </section>
 
           <Suspense fallback={<div className="min-h-screen" />}>
-            <section id="about">
+            <section id="about" aria-label="About Putu Adip">
               <About />
             </section>
 
-            <section id="skills">
+            <section id="skills" aria-label="Technical skills and technologies">
               <Skills />
             </section>
 
-            <section id="portfolio">
+            <section id="portfolio" aria-label="Featured projects and work">
               <Portfolio />
             </section>
 
-            <section id="resume">
+            <section id="resume" aria-label="Work experience and education">
               <Resume />
             </section>
 
-            <section id="testimonials">
+            <section id="testimonials" aria-label="Client testimonials">
               <Testimonials />
             </section>
 
-            <section id="contact">
+            <section id="contact" aria-label="Contact Putu Adip">
               <Contact />
             </section>
           </Suspense>
